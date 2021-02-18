@@ -1,19 +1,22 @@
-//Import modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const cors = require('cors');
+const { PORT } = require('./config/basic');
 
-//Basic configuration
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//Routing
-require('./route-prefixes')(app);
+//Settingan session
+require('./config/session')(app);
 
-//Starting server
-app.listen(process.env.PORT || 3001, () => {
+//Routes
+require('./routes/route-prefixes')(app);
+
+//Menjalankan server
+app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${process.env.PORT || 3001}`);
 });
