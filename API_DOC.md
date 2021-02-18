@@ -55,7 +55,7 @@ Login berhasil
 }
 ```
 
-# POST /logout
+# DELETE /logout
 Logout berhasil
 ```
 { success: true }
