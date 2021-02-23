@@ -1,13 +1,96 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.nofull{
+  display: none;
+}
+.full{
+  display: flex;
+}
+
+.kanan{
+  margin-right: -28vh;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.imgloginsam{
+  height: 100vh;
+}
+
+.imgloginup{
+  display: none;
+}
+
+.kirilogin{
+  width: 100%;
+  height: 100%;
+  margin-top: 15vh;
+  margin-bottom: 5vh;
+  margin-left: -10vh;
+}
+
+
+.formlogin{
+  margin-top: 5vh;
+}
+
+.logologin, .namelogin{
+  text-align: center;
+  color: #29f19c;
+}
+.namelogin{
+  margin-top: 1vh;
+}
+
+.halologin{
+  text-align: center;
+  margin-top: 3vh;
+}
+
+.btn-button1{
+  background: linear-gradient(to right, #02A1F9, #29F19C) !important;
+  color: white;
+  
+}
+
+.buttonlogin{
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .kanan{
+    display: none;
+  }
+  .kirilogin{
+    width: 100%;
+    height: 100%;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    margin-left: 25vh;
+  }
+  .nofull{
+    display: flex;
+  }
+  .imgloginup{
+    display: flex;
+    height: 100vh;
+    position: absolute;
+  }
+  /*kecil*/
+  .up{
+    height: 88vh;
+  }
+  .down{
+    height: 100vh;
+  }
 }
