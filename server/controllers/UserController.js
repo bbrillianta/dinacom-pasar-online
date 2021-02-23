@@ -60,7 +60,7 @@ class UserController {
     logout = async (req, res) => {
         //Hapus user session
         const loggedOut = await req.session.destroy();
-        if(!loggedOut) return res.status(500).json({ success: false });
+        if(!loggedOut) return res.status(500).json({ message: "Terjadi kesalahan pada server", success: false });
 
         //Hapus cookie
         res.clearCookie('session-id');

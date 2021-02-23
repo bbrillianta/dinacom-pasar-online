@@ -3,11 +3,14 @@ const { MONGO_URL } = require('./basic');
 
 //Konfigurasi mongoose
 class MongoDriver {
+    _Model;
+    _schema;
+    
     constructor(schema) {
         //Connect db
         mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
-        //Membuat schema mongoDB
+        //Membuat schema mongoDB dari parameter schema yang dikirim
         this._schema = mongoose.Schema(schema); 
     }
 

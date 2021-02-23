@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const MongoDriver = require('../config/MongoDriver');
 
-//Model User
+//Konfigurasi Model User
 class User extends MongoDriver {
     constructor() { 
-        //Mengirim argumen schema mongodb
         super({
             username: String,
             email: String,
