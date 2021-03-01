@@ -9,7 +9,7 @@ const NavbarPage = () => {
     return (
         //navbar
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand className="navbrand" href="home">
+            <Navbar.Brand className="navbrand" href="/">
                 <img
                     src={gambar}
                     width="100vh"

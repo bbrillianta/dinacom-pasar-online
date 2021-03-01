@@ -4,6 +4,7 @@ import RegisterPage from './components/RegisterPage';
 import HomePage from './components/HomePage';
 import NavbarPage from './components/NavbarPage';
 import CarouselPage from './components/CarouselPage';
+import CheckoutPage from './components/CheckoutPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,10 +23,13 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
-          <Route path="/home">
+          <Route exact path="/">
             <NavbarPage />
             <CarouselPage />
             <HomePage />
+          </Route>
+          <Route path="/checkout">
+            <CheckoutPage />
           </Route>
         </Switch>
       </Router>
