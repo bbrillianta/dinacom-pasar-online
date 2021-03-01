@@ -1,13 +1,191 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.nofull{
+  display: none;
+}
+.full{
+  display: flex;
+}
+
+.kanan{
+  margin-right: -28vh;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.imgloginsam{
+  height: 100vh;
+}
+
+.imgloginup{
+  display: none;
+}
+
+.kirilogin{
+  width: 100%;
+  height: 100%;
+  margin-top: 15vh;
+  margin-bottom: 5vh;
+  margin-left: -10vh;
+}
+
+
+.formlogin{
+  margin-top: 5vh;
+}
+
+.logologin, .namelogin{
+  text-align: center;
+  color: #29f19c;
+}
+.namelogin{
+  margin-top: 1vh;
+}
+
+.halologin{
+  text-align: center;
+  margin-top: 3vh;
+}
+
+.btn-button1{
+  background: linear-gradient(to right, #02A1F9, #29F19C) !important;
+  color: white;
+  
+}
+
+.buttonlogin{
+  text-align: center;
+}
+
+/*HOME PAGE*/
+.HomeLogo{
+  width: 10%;
+}
+.homesearch{
+  width: 55%;
+  margin-left: 10vh;
+  margin-right: 10vh;
+}
+.kantongtext{
+  margin-left: 2vh;
+  margin-top: auto;
+}
+.kantongtexta{
+  color: #529F1F;
+  font-size: 12px;
+}
+.kantongtexta2{
+  color: darkslategray;
+  font-size: 10px;
+}
+.homeuserfoto{
+  margin-left: 5vh;
+}
+.homeusernama{
+  margin-left: 1vh;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 15px;
+}
+.userimage{
+  width: 5vh;
+  height: 5vh;
+}
+.navbrand{
+  margin-left: 10vh;
+  
+}
+.nav2{
+  display: none;
+}
+
+/*homepage*/
+.batas{
+  width: 10vh;
+}
+.homekategori{
+  /* border-color: #529F1F; */
+  border: 3px solid #529F1F;
+  border-radius: .25rem;
+  width: 20vh;
+}
+.namakategori{
+  margin-top: 8vh;
+  margin-bottom: 2vh;
+}
+.list-produk1, .list-produk2{
+  margin-bottom: 10vh;
+  margin-top: 2vh;
+}
+.namelist{
+  margin-top: 5vh;
+}
+
+@media (max-width: 1000px) {
+  .kanan{
+    display: none;
+  }
+  .kirilogin{
+    width: 100%;
+    height: 100%;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    margin-left: 25vh;
+  }
+  .nofull{
+    display: flex;
+  }
+  .imgloginup{
+    display: flex;
+    height: 100vh;
+    position: absolute;
+  }
+  /*kecil*/
+  .up{
+    height: 88vh;
+  }
+  .down{
+    height: 100vh;
+  }
+}
+@media (max-width: 1241px) {
+  .kantongtexta, .kantongtexta2{
+    display: none;
+  }
+  .homesearch{
+    margin-right: 5vh;
+  }
+  .navtoggle{
+    margin-right: 10vh;
+  }
+}
+
+@media (max-width: 991px){
+
+  .homesearch{
+    width: 30%;
+  }
+  .nav1{
+    display: none;
+  }
+  .nav2{
+    display: block;
+    margin-left: 10vh;
+  }
+  
+}
+
+@media (max-width: 764px){
+
+
 }
