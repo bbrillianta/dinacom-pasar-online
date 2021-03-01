@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import HomePage from './components/HomePage';
+import NavbarPage from './components/NavbarPage';
+import CarouselPage from './components/CarouselPage';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
+import { Carousel } from 'react-bootstrap';
 
 function App() {
   return (
@@ -17,6 +21,11 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/home">
+            <NavbarPage />
+            <CarouselPage />
+            <HomePage />
           </Route>
         </Switch>
       </Router>
