@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import {
@@ -8,13 +8,6 @@ import {
 } from "react-router-dom";
 
 function App() {
-  //untuk kondisi jumlah user saat ini
-  const [username, setUsername] = useState("");
-  
-  function formUsername(event) {
-    setUsername(event.target.value);
-  }
-
   return (
     <div className="App">
       <Router>
