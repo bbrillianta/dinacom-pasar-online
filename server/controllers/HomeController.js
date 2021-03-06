@@ -8,6 +8,12 @@ class HomeController {
 
         res.json({ auth: true, userSession });
     }
+
+    image = async (req, res) => {
+        const { file } = req.params;
+
+        res.sendFile(file, { root: './public/' });
+    }
 }
 
 module.exports = HomeController;

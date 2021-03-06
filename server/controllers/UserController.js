@@ -1,12 +1,11 @@
-const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 //Controller untuk user logic
 class UserController {
     #UserModel;
 
-    constructor() {
-        this.#UserModel = new User().getModel();
+    constructor(UserModel) {
+        this.#UserModel = UserModel;
     }
 
     //** Register logic */

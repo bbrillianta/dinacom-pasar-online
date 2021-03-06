@@ -8,7 +8,7 @@ class MongoDriver {
     
     constructor(schema) {
         //Connect db
-        mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+        mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
         //Membuat schema mongoDB dari parameter schema yang dikirim
         this._schema = mongoose.Schema(schema); 

@@ -5,6 +5,8 @@ import HomePage from './components/HomePage';
 import NavbarPage from './components/NavbarPage';
 import CarouselPage from './components/CarouselPage';
 import CheckoutPage from './components/CheckoutPage';
+import CreateProducts from './testing/CreateProducts';
+import ShowProducts from './testing/ShowProducts';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,6 +32,12 @@ function App() {
           </Route>
           <Route path="/checkout">
             <CheckoutPage />
+          </Route>
+          <Route path="/product/create">
+            <CreateProducts />
+          </Route>
+          <Route path='/product'>
+            <ShowProducts />
           </Route>
         </Switch>
       </Router>
