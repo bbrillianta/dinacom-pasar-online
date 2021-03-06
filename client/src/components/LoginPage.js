@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Container, Image, Form, Button, div} from 'react-bootstrap';
 import gambar from '../asset/quote1.jpg';
-import '../cek.css';
+import '../css/LoginPage.css';
 
 const LoginPage = () => {
     const [email, setEmail] = useState();

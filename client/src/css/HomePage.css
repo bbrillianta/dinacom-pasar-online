@@ -1,0 +1,54 @@
+/*homepage*/
+.batas{
+    width: 10vh;
+}
+.homekategori{
+    /* border-color: #529F1F; */
+    border: 3px solid #529F1F;
+    border-radius: .25rem;
+    width: 20vh;
+}
+.namakategori{
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+}
+.list-produk1, .list-produk2, .list-produk3{
+    margin-bottom: 10vh;
+    margin-top: 2vh;
+}
+.namelist{
+    margin-top: 5vh;
+}
+.iklan2{
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+.kategoribelanja{
+    justify-content: center!important;
+}
+.namakategori{
+    text-align: center!important;
+}
+.card-text{
+    font-size: 10px!important;
+}
+.h5{
+    font-size: 1rem;
+}
+}
+
+@media (min-width: 768px) {
+.card-deck{
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.card-deck .card {
+    flex: 1 0;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+}
+}

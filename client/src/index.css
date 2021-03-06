@@ -13,10 +13,6 @@ body {
   display: flex;
 }
 
-.kanan{
-  margin-right: -28vh;
-  padding: 0;
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -31,13 +27,7 @@ code {
   display: none;
 }
 
-.kirilogin{
-  width: 100%;
-  height: 100%;
-  margin-top: 15vh;
-  margin-bottom: 5vh;
-  margin-left: -10vh;
-}
+
 
 
 .formlogin{
@@ -109,27 +99,7 @@ code {
   display: none;
 }
 
-/*homepage*/
-.batas{
-  width: 10vh;
-}
-.homekategori{
-  /* border-color: #529F1F; */
-  border: 3px solid #529F1F;
-  border-radius: .25rem;
-  width: 20vh;
-}
-.namakategori{
-  margin-top: 8vh;
-  margin-bottom: 2vh;
-}
-.list-produk1, .list-produk2{
-  margin-bottom: 10vh;
-  margin-top: 2vh;
-}
-.namelist{
-  margin-top: 5vh;
-}
+
 
 @media (max-width: 1000px) {
   .kanan{
