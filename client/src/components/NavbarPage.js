@@ -20,7 +20,7 @@ const NavbarPage = () => {
             <Navbar.Toggle className="navtoggle" aria-controls="basic-navbar-nav" />
 
             <Navbar.Collapse id="basic-navbar-nav">
-                <InputGroup className="homesearch">
+                <InputGroup className="homesearch mx-5">
                     <FormControl
                         placeholder="Cari belanjaan"
                         aria-label="Recipient's username"
@@ -33,25 +33,25 @@ const NavbarPage = () => {
                 </InputGroup>
 
                 <Nav className="nav2">
-                    <a>Keranjang</a>
+                    <a className="mt-2">Keranjang</a>
                     <br></br>
-                    <a>Akun</a>
+                    <a className="mt-2">Akun</a>
                 </Nav>
 
                 <Nav className="mr-auto nav1">
-                    <a href="keranjang">
+                    <a href="keranjang" className="d-flex">
                     <img
                         className="gambartas"
                         src={gambartas}
-                        width="30vh"
+                        width="30px"
                         className="d-inline-block align-top"
                         alt="DOSAR"
-                    /></a>
+                    />
                     <div className="kantongtext">
                         <div className="kantongtexta">Kantong Belanja</div>
                         <div className="kantongtexta2">3 Barang</div>
                     </div>
-
+                    </a>
                     <div className="homeuserfoto">
                         <Image className="userimage" src={mega} roundedCircle />
                     </div>

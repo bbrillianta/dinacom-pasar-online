@@ -14,20 +14,14 @@ const HomePage = () => {
     return (
         <Container>
             <Row className="justify-content-md-center namakategori">
-                <Col md="auto"><b>Kategori Belanja</b></Col>
+                <h4><b>Kategori Belanja</b></h4>
             </Row>
             <Row className="justify-content-md-center kategoribelanja">
-                <CardDeck>
-                    <Card>
-                        <a href=""><img className="homekategori" src={buah}></img></a>
-                    </Card>
-                    <Card>
-                        <a href=""><img className="homekategori" src={sayur}></img></a>
-                    </Card>
-                </CardDeck>
+                <a href=""><img className="homekategori" src={buah}></img></a>
+                <a href=""><img className="homekategori" src={sayur}></img></a>
             </Row>
             <Row className="namelist">
-                <Col><b>Produk Pilihan</b></Col>
+                <h4><b>Produk Terlaris</b></h4>
             </Row>
             <Row className="list-produk1">
                 <CardDeck>
@@ -100,7 +94,7 @@ const HomePage = () => {
                 </CardDeck>
             </Row>
             <Row>
-                <Col><b>Produk Pilihan</b></Col>
+                <h4><b>Produk Pilihan</b></h4>
             </Row>
             <Row className="list-produk2">
                 <CardDeck>

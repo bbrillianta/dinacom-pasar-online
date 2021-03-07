@@ -50,7 +50,7 @@ const CreateProducts = () => {
 
     return (
         <div>
-            <form  className="d-flex flex-column" method="POST" onSubmit={ handleSubmit } encType="multipart/form-data">
+            <form className="d-flex flex-column" method="POST" onSubmit={ handleSubmit } encType="multipart/form-data">
                 <select value={ inputs.seller } name="seller" onChange={ handleInputs }>
                     {
                         sellers.map((item, index) => 
