@@ -15,17 +15,17 @@ const ProdukPage = () => {
     return (
         <Container>
             <Row className="justify-content-md-center produk mt-5">
-                <Col md="6">
+                <Col lg="6">
                     <img src={tomat} className="fotoproduk"></img>
                 </Col>
-                <Col md="6">
+                <Col lg="6">
                     <div className="bawah">
                         <div className="d-flex justify-content-between">
                             <div className="d-flex flex-column">
                                 <h3 className="mb-0"><b>Tomat Merah</b></h3>
                                 <p>1 kg</p>
                             </div>
-                            <Image className="userimage" src={mega} roundedCircle />
+                            <Image width="50" height="50" src={mega} roundedCircle />
                         </div>
                         <p className="mt-4"><b style={{fontSize: "30px"}}>Rp. 27.200</b>/kg</p>
                         <p>Kuantitas</p>

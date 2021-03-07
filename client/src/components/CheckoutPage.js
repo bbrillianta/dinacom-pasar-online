@@ -21,7 +21,7 @@ const CheckoutPage = () => {
                 </Col>
             </Row>
             <Row className="mt-3">
-                <Col md="9">
+                <Col lg="9">
                     <div className="left-col p-5">
                         <div>
                             <div className="mr-auto textsatu">
@@ -36,23 +36,8 @@ const CheckoutPage = () => {
                                         <div className="alamattujuan">Jl. Raya  Ds Takeranklating Kec Tikung Kabupaten Lamongan</div>
                                     </div>
                                 </div>
-                                <div className="d-inline-block kotaksatu2 mr-auto">
-                                    <div className="d--block">
-                                        <div className="namatujuan"><h5><b>Mega Darta</b></h5></div>
-                                        <div className="alamattujuan">Jl. Raya  Ds Takeranklating Kec Tikung Kabupaten Lamongan</div>
-                                    </div>
-                                </div>
-                                <div className="d-inline-block kotaksatu3 mr-auto">
-                                    <div className="d-inline-block">
-                                        <div className="namatujuan">
-                                        <h5><b>Mega Darta</b></h5>
-                                        </div>
-                                        <div className="alamattujuan">Jl. Raya  Ds Takeranklating Kec Tikung Kabupaten Lamongan</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div className="jarak"></div>
                         <div className="mr-auto textsatu">
                             <Image src={dua} className="d-inline-block align-center satu" roundedCircle />
                             <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Total Pesanan</h6>
@@ -118,23 +103,25 @@ const CheckoutPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="jarak"></div>
                         <div className="mr-auto textsatu">
                             <Image src={tiga} className="d-inline-block align-center satu" roundedCircle />
                             <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Metode Pembayaran</h6>
                         </div>
                         <div className="kotaktiga">
                             <Row>
-                                <Col style={{marginLeft: "7vh"}}>
-                                  <Image src={hijau} className="d-inline-block align-center dua" roundedCircle /> 
-                                  <h6 className="d-inline-block align-center" style={{ marginLeft: "1vh" }}>Bayar di tempat</h6>
+                                <Col style={{ marginLeft: "80px", padding: "0" }}>
+                                    <input type="radio" name="pembayaran"></input>
+                                    {/* <Image src={hijau} className="d-inline-block align-center dua" roundedCircle />  */}
+                                    <h6 className="d-inline-block align-center ml-1">Bayar di tempat</h6>
                                 </Col>
                                 <Col>
-                                    <Image src={lingkaran} className="d-inline-block align-center dua" roundedCircle />
-                                    <h6 className="d-inline-block align-center" style={{ marginLeft: "1vh" }}>Kartu Kredit</h6>
+                                    <input type="radio" name="pembayaran"></input>
+                                    {/* <Image src={lingkaran} className="d-inline-block align-center dua" roundedCircle /> */}
+                                    <h6 className="d-inline-block align-center ml-1">Kartu Kredit</h6>
                                 </Col>
                                 <Col>
-                                <Image src={lingkaran} className="d-inline-block align-center dua" roundedCircle /> M-Banking
+                                    <input type="radio" name="pembayaran"></input>
+                                    <h6 className="d-inline-block align-center ml-1">M-Banking</h6>
                                 </Col>
                             </Row>
                             <Row>
@@ -148,7 +135,7 @@ const CheckoutPage = () => {
                         </div>
                     </div>
                 </Col>
-                <Col md="3">
+                <Col lg="3">
                     <div className="right-col p-4">
                         <strong>Detail Pesanan</strong>
                         <hr></hr>

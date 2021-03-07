@@ -1,6 +1,5 @@
 .checkout-page {
     background-color: #f6f6f6;
-    height: 200vh;
 }
 
 .left-col {
@@ -17,7 +16,7 @@
 }
 
 .satu{
-    width: 5vh;
+    width: 45px;
 }
 .dua{
     width: 2vh;
@@ -31,20 +30,15 @@
 .kotaksatu{
     border-left-style: dashed;
     border-left-color: #529f1f;
-    height: 30vh;
-    margin-left: 4.6vh;
+    margin-left: 20px;
 }
 .kotakdua{
     border-left-style: dashed;
     border-left-color: #529f1f;
-    height: 50vh;
-    margin-left: 4.6vh;
+    margin-left: 20px;
 }
 .kotaktiga{
-    border-left-style: dashed;
-    border-left-color: #529f1f;
-    height: 30vh;
-    margin-left: 4.6vh;
+    margin-left: 20px;
 }
 .kotakdua1{
     margin-left: 7.7vh;
@@ -57,7 +51,7 @@
     margin-left: 7.7vh;
     border-style: solid;
     border-color: darkturquoise;
-    width: 25%;
+    width: 300px;
     height: 100%;
 }
 .kotaksatu2{
@@ -76,10 +70,10 @@
     background-color: #F6F6F6;
 }
 .kotaktiga1{
-    margin-left: 10vh;
+    margin-left: 80px;
     border-style: solid;
     border-color: #529f1f;
-    width: 25%;
+    width: 300px;
     height: 100%;
 }
 .namatujuan{
@@ -97,7 +91,7 @@
 }
 
 .textsatu{
-    margin-left: 2.1vh;
+    
 }
 .gambarprodukco{
     width: 20vh;

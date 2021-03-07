@@ -20,12 +20,10 @@
 .baris1, .baris2{
     text-align: center;
 }
-a{
-    margin-right: 2vh;
-    margin-left: 2vh;
+/* a{
     font-weight: bold;
     color: black;
-}
+} */
 .ig{
     width: 60px;
 }

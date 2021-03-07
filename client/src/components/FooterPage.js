@@ -14,16 +14,21 @@ const FooterPage = () => {
         <Card.Footer className="text-muted">
             <div className="footer1 d-flex flex-column justify-content-center">
                 <div className="baris1">
-                    <a><Image className="ig" src={gg} roundedCircle /></a>
+                    <a><Image className="ig mx-2" src={gg} roundedCircle /></a>
                     
-                    <a><Image className="ig" src={ig} roundedCircle /></a>
+                    <a><Image className="ig mx-2" src={ig} roundedCircle /></a>
 
-                    <a><Image className="ig" src={fb} roundedCircle /></a>
+                    <a><Image className="ig mx-2" src={fb} roundedCircle /></a>
 
-                    <a><Image className="ig" src={twt} roundedCircle /></a>
+                    <a><Image className="ig mx-2" src={twt} roundedCircle /></a>
                 </div>
                 <div className="baris2 mt-3">
-                    <a>Home</a><a>Product</a><a>Blog</a><a>Partner</a><a>Contact</a><a>Location</a>
+                    <a className="mx-2">Home</a>
+                    <a className="mx-2">Product</a>
+                    <a className="mx-2">Blog</a>
+                    <a className="mx-2">Partner</a>
+                    <a className="mx-2">Contact</a>
+                    <a className="mx-2">Location</a>
                 </div>
             </div>
             <div className="footer2 d-flex flex-column justify-content-center">

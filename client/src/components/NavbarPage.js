@@ -3,59 +3,47 @@ import { Carousel, Form, Navbar, Nav, FormControl, NavDropdown, InputGroup, Butt
 import gambar from '../asset/DosarLogo.png';
 import gambartas from '../asset/shopping-bag-icon.png';
 import mega from '../asset/mega1.jpg';
+import '../css/Navbar.css';
 
 
 const NavbarPage = () => {
     return (
-        //navbar
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand className="navbrand" href="/">
+        <Navbar bg="light" expand="lg" sticky="top">
+            <Navbar.Brand href="/">
                 <img
                     src={gambar}
-                    width="100vh"
+                    width="150"
                     className="d-inline-block align-top"
                     alt="DOSAR"
                 />
             </Navbar.Brand>
-            <Navbar.Toggle className="navtoggle" aria-controls="basic-navbar-nav" />
-
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <InputGroup className="homesearch mx-5">
-                    <FormControl
-                        placeholder="Cari belanjaan"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                        style={{ borderColor: "#529F1F" }}
-                    />
-                    <InputGroup.Append>
-                        <Button variant="outline-success">SEARCH</Button>
-                    </InputGroup.Append>
-                </InputGroup>
-
-                <Nav className="nav2">
-                    <a className="mt-2">Keranjang</a>
-                    <br></br>
-                    <a className="mt-2">Akun</a>
-                </Nav>
-
-                <Nav className="mr-auto nav1">
-                    <a href="keranjang" className="d-flex">
-                    <img
-                        className="gambartas"
-                        src={gambartas}
-                        width="30px"
-                        className="d-inline-block align-top"
-                        alt="DOSAR"
-                    />
-                    <div className="kantongtext">
-                        <div className="kantongtexta">Kantong Belanja</div>
-                        <div className="kantongtexta2">3 Barang</div>
-                    </div>
-                    </a>
-                    <div className="homeuserfoto">
-                        <Image className="userimage" src={mega} roundedCircle />
-                    </div>
-                    <div className="homeusernama">Mega Darta</div>
+                <Form inline className="mx-auto" >
+                    <FormControl type="text" placeholder="Search" className="searchbar"/>
+                    <Button variant="outline-success">Search</Button>
+                </Form>
+                <Nav className="ml-auto mr-5">
+                    <Nav.Link href="#home" className="d-flex align-items-center mr-5">
+                        <img
+                            src={gambartas}
+                            width="30px"
+                            height="35px"
+                            className="d-inline-block align-top"
+                            alt="DOSAR"
+                        />
+                        <a className="ml-2">
+                            <p className="m-0" style={{ fontSize: "12px", color: "#529F1F" }}><b>Kantong Belanja</b></p>
+                            <small>3 barang</small>
+                        </a>
+                    </Nav.Link>
+                    <NavDropdown title=
+                            { <Image width="35" src={mega} roundedCircle /> }
+                    id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+                        {/* <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item> */}
+                    </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
