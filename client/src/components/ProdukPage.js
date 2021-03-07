@@ -14,34 +14,26 @@ import alpukat from '../asset/Alpukat-Muda.jpg';
 const ProdukPage = () => {
     return (
         <Container>
-            <Row className="justify-content-md-center produk">
+            <Row className="justify-content-md-center produk mt-5">
                 <Col>
                     <img src={tomat} className="fotoproduk"></img>
                 </Col>
                 <Col>
-                    <div className="atas"></div>
                     <div className="bawah">
-                        <Row>
-                            <Col className="text1"><h3><b>Tomat Merah</b></h3></Col>
-                            <Col className="foto"><Image className="userimage" src={mega} roundedCircle /></Col>
-                        </Row>
-                        <Row>
-                            <Col className="text2">1 kg</Col>
-                        </Row>
-                        <Row>
-                            <Col className="text5"><text className="text3">Rp. 32.000</text><text className="text4"> (Diskon 15%)</text></Col>
-                        </Row>
-                        <Row>
-                            <Col className="text6"><b>Rp. 27.200</b><a className="text7">/kg</a></Col>
-                        </Row>
-                        <Row>
-                            <Col className="text8">Kuantitas</Col>
-                        </Row>
-                        <Row style={{ marginTop: "1vh", marginBottom: "2vh" }} >
-                            <Col className="plusminus">
-                                <InputGroup style={{ width: "20vh" }}>
+                        <div className="d-flex justify-content-between">
+                            <div className="d-flex flex-column">
+                                <h3 className="mb-0"><b>Tomat Merah</b></h3>
+                                <p>1 kg</p>
+                            </div>
+                            <Image className="userimage" src={mega} roundedCircle />
+                        </div>
+                        <p><b style={{fontSize: "30px"}}>Rp. 27.200</b>/kg</p>
+                        <p>Kuantitas</p>
+                        <Row className="mb-5">
+                            <Col md="5" className="plusminus">
+                                <InputGroup>
                                     <Button variant="outline-danger">-</Button>
-                                    <FormControl className="text-center"
+                                    <FormControl className="text-center mx-3"
                                         placeholder="1"
                                     />
                                     <InputGroup.Append>
@@ -49,9 +41,9 @@ const ProdukPage = () => {
                                     </InputGroup.Append>
                                 </InputGroup>
                             </Col>
-                            <Col className="text10">
-                                <Row className="text9">Sub Total</Row>
-                                <Row><h5><b>Rp. 81.600</b></h5></Row>
+                            <Col md="7" className="text10">
+                                <small>Sub Total</small>
+                                <h5 className="m-0"><b>Rp. 81.600</b></h5>
                             </Col>
                         </Row>
                         <Row className="kantong">

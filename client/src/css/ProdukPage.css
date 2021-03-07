@@ -1,8 +1,8 @@
-.produk{
+/* .produk{
     margin-top: 10vh;
     margin-bottom: 10vh;
-}
-.text1{
+} */
+/* .text1{
     margin-left: 10%;
 }
 .text2{
@@ -47,28 +47,23 @@
 }
 .text13{
     margin-top: 10vh;
-}
+} */
 .kantong{
     align-content: ce;
 }
 .img11{
     width: 3vh;
 }
-.plusminus{
-    margin-left: 10%;
-    margin-top: 1vh;
-}
-.userimage{
+
+/* .userimage{
     margin-left: 60%;
-}
-.atas{
-    background-color: #529F1F;
-    height: 5%;
-}
+} */
+
 .bawah{
-    height: 80%;
+    border: 1px solid black;
+    border-top: 25px solid #529F1F;
     box-shadow: -1px 3px 1px rgba(0,0,0,0.1);
-    padding: 10px;
+    padding: 20px;
     /* border: 1px dashed grey; */
 }
 .produkterkait{
