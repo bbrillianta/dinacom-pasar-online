@@ -3,7 +3,7 @@ import { Carousel, Form, Navbar, Nav, FormControl, NavDropdown, InputGroup, Butt
 import gambar from '../asset/DosarLogo.png';
 import gambartas from '../asset/shopping-bag-icon.png';
 import mega from '../asset/mega1.jpg';
-import '../cek.css';
+
 
 const NavbarPage = () => {
     return (
@@ -39,13 +39,14 @@ const NavbarPage = () => {
                 </Nav>
 
                 <Nav className="mr-auto nav1">
+                    <a href="keranjang">
                     <img
                         className="gambartas"
                         src={gambartas}
                         width="30vh"
                         className="d-inline-block align-top"
                         alt="DOSAR"
-                    />
+                    /></a>
                     <div className="kantongtext">
                         <div className="kantongtexta">Kantong Belanja</div>
                         <div className="kantongtexta2">3 Barang</div>

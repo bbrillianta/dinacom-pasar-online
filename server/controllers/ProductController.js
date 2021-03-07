@@ -22,6 +22,7 @@ class ProductController {
 
     getAll = async (req, res) => {
         const foundDocs = await this.#ProductModel.find({}).populate('seller');
+        
         res.json({ success: true, foundDocs });
     }
 

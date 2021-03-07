@@ -7,7 +7,8 @@ class User extends MongoDriver {
         super({
             username: String,
             email: String,
-            password: String
+            password: String,
+            carts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
         });
 
         //Membuat model User

@@ -7,12 +7,18 @@ import CarouselPage from './components/CarouselPage';
 import CheckoutPage from './components/CheckoutPage';
 import CreateProducts from './testing/CreateProducts';
 import ShowProducts from './testing/ShowProducts';
+import FooterPage from './components/FooterPage';
+import KeranjangPage from './components/KeranjangPage';
+import './App.css';
+import { Carousel } from 'react-bootstrap';
+import ProdukPage from './components/ProdukPage';
+import ListPage from './components/ListPage';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import { Carousel } from 'react-bootstrap';
+
 
 function App() {
   return (
@@ -29,6 +35,7 @@ function App() {
             <NavbarPage />
             <CarouselPage />
             <HomePage />
+            <FooterPage />
           </Route>
           <Route path="/checkout">
             <CheckoutPage />
@@ -38,6 +45,19 @@ function App() {
           </Route>
           <Route path='/product'>
             <ShowProducts />
+          </Route>
+          <Route path="/keranjang">
+            <KeranjangPage />
+          </Route>
+          <Route path="/produk">
+            <NavbarPage />
+            <ProdukPage />
+            <FooterPage />
+          </Route>
+          <Route path="/list">
+            <NavbarPage />
+            <ListPage />
+            <FooterPage />
           </Route>
         </Switch>
       </Router>

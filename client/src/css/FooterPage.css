@@ -1,0 +1,41 @@
+.footer1{
+    background-color: #F7F7F7;
+    height: 30vh;
+}
+
+.footer2{
+    background-color: #529F1F;
+    height: 20vh;
+}
+.f1{
+    height: 5vh;
+}
+.f2, .f3{
+    color: white;
+    text-align: center;
+}
+.baris0{
+    height: 8vh;
+}
+.baris1, .baris2{
+    text-align: center;
+}
+.baris2{
+    margin-top: 3vh;
+}
+a{
+    margin-right: 2vh;
+    margin-left: 2vh;
+    font-weight: bold;
+    color: black;
+}
+.ig{
+    width: 8vh;
+}
+col{
+    margin-left: 5vh;
+    margin-left: 5vh;
+}
+.card-footer{
+    padding: 0;
+}

@@ -1,0 +1,21 @@
+.listatas{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.namapenjual{
+    font-size: 12px;
+    font-weight: bold;
+}
+.jumlahterjual{
+    color: #f5be00;
+    font-size: 12px;
+}
+.harganormal{
+    color: darkred;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+.diskon{
+    color: #529f1f;
+    font-size: 13px;
+}
