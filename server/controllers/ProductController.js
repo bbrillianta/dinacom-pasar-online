@@ -27,7 +27,7 @@ class ProductController {
     }
 
     create = async (req, res) => {
-        const { name, price, seller, minPrice, stock} = req.body;
+        const { name, price, seller, minPrice, stock, category} = req.body;
         const { file } = req;
         const sold = 0;
 
@@ -38,6 +38,7 @@ class ProductController {
             minPrice,
             stock,
             sold,
+            category,
             img: {
                 path: `public/${ file.filename }`,
                 contentType: file.mimetype

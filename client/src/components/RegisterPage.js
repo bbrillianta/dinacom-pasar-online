@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col, Container, Image, Form, Button, div} from 'react-bootstrap';
-import gambar from '../asset/quote1.jpg';
+import gambar from '../asset/DosarLogo.png';
+import sideimage from '../asset/quote1.jpg'
 import '../css/LoginPage.css';
+
 
 const RegisterPage = () => {
     const [username, setUsername] = useState();
@@ -22,59 +24,38 @@ const RegisterPage = () => {
         }
 
     return (
-        <Container>
+        <Container fluid>
         <Row>
-            <Col>
-            <div className="kiri">
-            <div className="kirilogin">
-                <div className="logologin">
-                    <Image src="https://s1.bukalapak.com/img/13964212711/large/Jual_Vinyl_Lantai_Motif_Polos_Vinyl_Meteran_Warna_Hitam.jpg" roundedCircle width="80" height="80px" />
+            <Col  className="d-flex flex-column align-items-center justify-content-around">
+                <Image src={ gambar } width="234" height="72" className="mt-5" />
+                <div className="d-flex flex-column align-items-center mt-3">
+                    
                 </div>
-                <div className="namelogin"><h5><b>NAMA BRAND</b></h5></div>
-                <div className="halologin">
-                    Create an account
-                </div>
-                <div className="formregister">
-                    <Form onSubmit={submitregister} method="post">
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>USERNAME</Form.Label>
-                            <Form.Control onChange={e => setUsername(e.target.value)} type="text" placeholder="Enter username" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>EMAIL</Form.Label>
-                            <Form.Control onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>PASSWORD</Form.Label>
-                            <Form.Control onChange={e => setPassword(e.target.value)} type="password" placeholder="Enter password" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>VERIFY PASSWORD</Form.Label>
-                            <Form.Control onChange={e => setConfirm(e.target.value)} type="password" placeholder="Confirm password" />
-                        </Form.Group>
-
-                        <div className="buttonlogin">
-                        <Button variant="button1" type="submit" >REGISTER</Button>
-                        {pesan && <p>{pesan}</p>}
-                        </div>
-                    </Form>
-                </div>
-            </div>
-            </div>
+                <Form onSubmit={submitregister} method="post" className="d-flex flex-column align-items-center form-login">
+                    <Form.Group controlId="formBasicUsername" >
+                        <Form.Label>USERNAME</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setUsername(e.target.value)} type="text" placeholder="Enter username" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicEmail" >
+                        <Form.Label>EMAIL</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>PASSWORD</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicVPassword">
+                        <Form.Label>VERIFY PASSWORD</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setConfirm(e.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Button variant="button1" type="submit" className="mt-4" >REGISTER</Button>
+                </Form>
+                <p>Sudah mempunyai akun? <a href="/login" style={{ color: "#529F1F" }}><b>Login</b></a></p>
             </Col>
-            <Col>
-                <div className="kanan">
-                     <Image className="imgloginsam" src={gambar} />
-                </div>
+            <Col className="side-img">
+                <Image src={ sideimage } style={{ width: "50vw", height: "100vh" }}/>
             </Col>
         </Row>
-        
-        {/* <div className="nofull">
-            
-        </div>  */}
         </Container>
     );
 };

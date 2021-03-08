@@ -8,7 +8,7 @@ const sellerRouter = (SellerModel) => {
 
     router.get('/', sellerController.getAll);
 
-    router.post('/create', sellerController.create);
+    router.post('/create', sellerController.uploadImg(), sellerController.create);
 
     //Mengembalikan module router
     return router;

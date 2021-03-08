@@ -1,0 +1,16 @@
+.searchbar {
+    width: 50vw!important;
+}
+
+.dropdown-menu {
+    left: -50px!important;
+}
+
+.cart {
+    margin-right: 60px;
+}
+@media (max-width: 1280px) {
+    .searchbar {
+        width: auto!important;
+    }
+}

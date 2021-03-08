@@ -15,21 +15,21 @@ const ProdukPage = () => {
     return (
         <Container>
             <Row className="justify-content-md-center produk mt-5">
-                <Col>
+                <Col lg="6">
                     <img src={tomat} className="fotoproduk"></img>
                 </Col>
-                <Col>
+                <Col lg="6">
                     <div className="bawah">
                         <div className="d-flex justify-content-between">
                             <div className="d-flex flex-column">
                                 <h3 className="mb-0"><b>Tomat Merah</b></h3>
                                 <p>1 kg</p>
                             </div>
-                            <Image className="userimage" src={mega} roundedCircle />
+                            <Image width="50" height="50" src={mega} roundedCircle />
                         </div>
-                        <p><b style={{fontSize: "30px"}}>Rp. 27.200</b>/kg</p>
+                        <p className="mt-4"><b style={{fontSize: "30px"}}>Rp. 27.200</b>/kg</p>
                         <p>Kuantitas</p>
-                        <Row className="mb-5">
+                        <Row className="mb-4">
                             <Col md="5" className="plusminus">
                                 <InputGroup>
                                     <Button variant="outline-danger">-</Button>
@@ -41,16 +41,14 @@ const ProdukPage = () => {
                                     </InputGroup.Append>
                                 </InputGroup>
                             </Col>
-                            <Col md="7" className="text10">
+                            <Col md="7" className="text10 pl-5">
                                 <small>Sub Total</small>
                                 <h5 className="m-0"><b>Rp. 81.600</b></h5>
                             </Col>
                         </Row>
-                        <Row className="kantong">
-                            <Col className="text11">
-                                <Button variant="success"><img src={gambartas} className="img11"></img><text className="text11name">  Masukkan Kantong</text></Button>
-                            </Col>
-                            <Col className="text12"><InputGroup className="mb-3">
+                        <div className="d-flex">
+                            <Button variant="success"style={{ width: "500px" }}><img src={gambartas} className="img11"></img><text className="text11name">  Masukkan Kantong</text></Button>
+                            <InputGroup className="pl-3">
                                 <FormControl
                                     placeholder="Tawar produk"
                                     aria-label="Recipient's username"
@@ -60,13 +58,12 @@ const ProdukPage = () => {
                                     <Button variant="outline-danger">Tawar</Button>
                                 </InputGroup.Append>
                             </InputGroup>
-                            </Col>
-                        </Row>
+                        </div>
                     </div>
                 </Col>
             </Row>
 
-            <Row className="produkterkait">
+            <Row className="produkterkait mt-3">
                 <Col md="auto"><b>Produk Terkait</b></Col>
             </Row>
 

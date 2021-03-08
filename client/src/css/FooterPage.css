@@ -1,11 +1,11 @@
 .footer1{
     background-color: #F7F7F7;
-    height: 30vh;
+    height: 200px;
 }
 
 .footer2{
     background-color: #529F1F;
-    height: 20vh;
+    height: 100px;
 }
 .f1{
     height: 5vh;
@@ -20,17 +20,12 @@
 .baris1, .baris2{
     text-align: center;
 }
-.baris2{
-    margin-top: 3vh;
-}
-a{
-    margin-right: 2vh;
-    margin-left: 2vh;
+/* a{
     font-weight: bold;
     color: black;
-}
+} */
 .ig{
-    width: 8vh;
+    width: 60px;
 }
 col{
     margin-left: 5vh;

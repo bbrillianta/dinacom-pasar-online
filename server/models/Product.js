@@ -6,6 +6,7 @@ class Product extends MongoDriver {
         super({
             name: String,
             price: Number,
+            category: String,
             img: {
                 path: String,
                 contentType: String

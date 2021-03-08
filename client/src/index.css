@@ -1,4 +1,4 @@
-body {
+body, {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -63,10 +63,17 @@ code {
 }
 .homesearch{
   width: 55%;
-  margin-left: 10vh;
-  margin-right: 10vh;
 }
-.kantongtext{
+
+.product {
+  width: 13rem;
+  margin: 10px 10px 10px 0;
+}
+
+.product:hover {
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+}
+/* .kantongtext{
   margin-left: 2vh;
   margin-top: auto;
 }
@@ -77,16 +84,16 @@ code {
 .kantongtexta2{
   color: darkslategray;
   font-size: 10px;
-}
-.homeuserfoto{
+} */
+/* .homeuserfoto{
   margin-left: 5vh;
-}
-.homeusernama{
+} */
+/* .homeusernama{
   margin-left: 1vh;
   margin-top: auto;
   margin-bottom: auto;
   font-size: 15px;
-}
+} */
 .userimage{
   width: 50px;
   height: 5a0px;
@@ -140,17 +147,24 @@ code {
   }
 }
 
+a, a:hover {
+  text-decoration: none;
+  color: black;
+}
+
 @media (max-width: 991px){
 
   .homesearch{
-    width: 30%;
+    width: 55%;
+    margin-top: 20px!important;
+    margin-left: 10px!important;
   }
   .nav1{
     display: none;
   }
   .nav2{
     display: block;
-    margin-left: 10vh;
+    margin-left: 10px;
   }
   
 }

@@ -26,6 +26,7 @@ const CreateProducts = () => {
         const form = new FormData();
         form.append('img', prodImg.current.files[0]);
         form.append('name', inputs.name);
+        form.append('category', inputs.category);
         form.append('price', inputs.price);
         form.append('seller', inputs.seller);
         form.append('minPrice', inputs.minPrice);
@@ -50,13 +51,17 @@ const CreateProducts = () => {
 
     return (
         <div>
-            <form  className="d-flex flex-column" method="POST" onSubmit={ handleSubmit } encType="multipart/form-data">
+            <form className="d-flex flex-column" method="POST" onSubmit={ handleSubmit } encType="multipart/form-data">
                 <select value={ inputs.seller } name="seller" onChange={ handleInputs }>
                     {
                         sellers.map((item, index) => 
                             <option key={ index } value={ item._id }>{ item.name }</option>
                         )
                     }
+                </select>
+                <select name="category" onChange={ handleInputs }>
+                    <option value="Sayur"> Sayur </option>
+                    <option value="Buah"> Buah </option>
                 </select>
                 <input type="text" name="name" onChange={ handleInputs } placeholder="nama product"></input>
                 <input type="number" name="price" onChange={ handleInputs } placeholder="harga product"></input>

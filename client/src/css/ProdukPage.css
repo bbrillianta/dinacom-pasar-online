@@ -48,9 +48,9 @@
 .text13{
     margin-top: 10vh;
 } */
-.kantong{
+/* .kantong{
     align-content: ce;
-}
+} */
 .img11{
     width: 3vh;
 }
@@ -60,13 +60,17 @@
 } */
 
 .bawah{
-    border: 1px solid black;
     border-top: 25px solid #529F1F;
-    box-shadow: -1px 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
     padding: 20px;
     /* border: 1px dashed grey; */
 }
 .produkterkait{
     text-align: center!important;
     font-size: 30px;
+}
+
+.fotoproduk {
+    max-width: 100%;
+    max-height: 100%;
 }

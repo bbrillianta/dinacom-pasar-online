@@ -6,16 +6,21 @@
     /* border-color: #529F1F; */
     border: 3px solid #529F1F;
     border-radius: .25rem;
-    width: 20vh;
+    width: 200px;
 }
 .namakategori{
     margin-top: 8vh;
     margin-bottom: 2vh;
 }
-.list-produk1, .list-produk2, .list-produk3{
+
+/* .produk-list .card {
+    margin: 0 10px!important;
+} */
+
+/* .list-produk1, .list-produk2, .list-produk3{
     margin-bottom: 10vh;
     margin-top: 2vh;
-}
+} */
 .namelist{
     margin-top: 5vh;
 }

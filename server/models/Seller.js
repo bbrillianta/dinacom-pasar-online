@@ -5,6 +5,10 @@ class Seller extends MongoDriver {
     constructor() {
         super({
             name: String,
+            picture: { 
+                path: String,
+                contentType: String
+            },
             products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
         });
 

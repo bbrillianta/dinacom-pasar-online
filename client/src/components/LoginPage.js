@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Container, Image, Form, Button, div} from 'react-bootstrap';
-import gambar from '../asset/quote1.jpg';
+import gambar from '../asset/DosarLogo.png';
+import sideimage from '../asset/quote1.jpg'
 import '../css/LoginPage.css';
 
 const LoginPage = () => {
@@ -18,50 +19,31 @@ const LoginPage = () => {
         }).then(response => response.json()).then(data => console.log(data))        
         }
     return (
-        <Container>
+        <Container fluid>
         <Row>
-            <Col>
-            <div className="kiri">
-            <div className="kirilogin">
-                <div className="logologin">
-                    <Image src="https://s1.bukalapak.com/img/13964212711/large/Jual_Vinyl_Lantai_Motif_Polos_Vinyl_Meteran_Warna_Hitam.jpg" roundedCircle width="80" height="80px" />
+            <Col className="d-flex flex-column align-items-center justify-content-around">
+                <Image src={ gambar } width="234" height="72" className="mt-5" />
+                <div className="d-flex flex-column align-items-center mt-3">
+                    <h4><b>HELLO!</b></h4>
+                    <p>Ayo login ke akunmu!</p>
                 </div>
-                <div className="namelogin"><h5><b>NAMA BRAND</b></h5></div>
-                <div className="halologin">
-                    <b>HELLO!</b>
-                    <br></br>
-                    Please Login to Your Account!
-                </div>
-                <div className="formlogin">
-                    <Form onSubmit={submitlogin} method="post">
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
-                        </Form.Group>
-                        <div className="buttonlogin">
-                        <Button variant="button1" type="submit" >LOGIN</Button>
-                        <a href="/register">Register</a>
-                        </div>
-                    </Form>
-                </div>
-            </div>
-            </div>
+                <Form onSubmit={submitlogin} method="post" className="d-flex flex-column align-items-center form-login">
+                    <Form.Group controlId="formBasicEmail" >
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Button variant="button1" type="submit" className="mt-4" >LOGIN</Button>
+                </Form>
+                <p>Belum mempunyai akun? <a href="/register" style={{ color: "#529F1F" }}><b>Register</b></a></p>
             </Col>
-            <Col>
-                <div className="kanan">
-                     <Image className="imgloginsam" src={gambar} />
-                </div>
+            <Col className="side-img">
+                <Image src={ sideimage } style={{ width: "50vw", height: "100vh" }}/>
             </Col>
         </Row>
-        
-        {/* <div className="nofull">
-            
-        </div>  */}
         </Container>
     );
 };

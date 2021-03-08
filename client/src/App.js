@@ -13,6 +13,7 @@ import './App.css';
 import { Carousel } from 'react-bootstrap';
 import ProdukPage from './components/ProdukPage';
 import ListPage from './components/ListPage';
+import CreateSeller from './testing/CreateSeller';
 import {
   BrowserRouter as Router,
   Switch,
@@ -59,6 +60,12 @@ function App() {
             <NavbarPage />
             <ListPage />
             <FooterPage />
+          </Route>
+          <Route path="/seller/create">
+            <CreateSeller />
+          </Route>
+          <Route >
+            
           </Route>
         </Switch>
       </Router>
