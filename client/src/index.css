@@ -1,4 +1,4 @@
-body, {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -68,6 +68,11 @@ code {
 .product {
   width: 13rem;
   margin: 10px 10px 10px 0;
+}
+
+.product .card-img-top {
+  height: 154px;
+  object-fit: cover;
 }
 
 .product:hover {

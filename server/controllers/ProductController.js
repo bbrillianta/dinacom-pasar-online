@@ -14,8 +14,24 @@ class ProductController {
         this.#upload = multer({ storage: storage });
     }
 
-    mostSold = async (req, res) => {
-        const foundDocs = await this.#ProductModel.find({}).sort({ sold: 'asc' }).limit(5);
+    getPopular = async (req, res) => {
+        //Memilih data yang diurutkan dari jumlah pembelian terbesar dan dipilih sebanyak 5
+        const foundDocs = await this.#ProductModel.find({})
+        .populate('seller')
+        .sort({ sold: 'desc' })
+        .limit(5);
+
+        res.json({ success: true, foundDocs });
+    }
+
+    getRecommended = async (req, res) => {
+        //Memilih data secara acak sebanyak 5
+        let foundDocs = await this.#ProductModel.aggregate([{ $sample: { size: 5 } }])
+        .limit(5)
+        .exec();
+
+        //Populate field seller
+        foundDocs = await this.#ProductModel.populate(foundDocs, { path: 'seller' });
 
         res.json({ success: true, foundDocs });
     }

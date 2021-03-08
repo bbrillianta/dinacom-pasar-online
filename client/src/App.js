@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SERVER_HOST } from './config.js';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import HomePage from './components/HomePage';
@@ -18,10 +19,17 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useLocation
 } from "react-router-dom";
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+}
 
 function App() {
+  // const query = useQuery();
+  // const [queryProduct, setQueryProduct] = useState(null)
+
   return (
     <div className="App">
       <Router>
@@ -41,17 +49,17 @@ function App() {
           <Route path="/checkout">
             <CheckoutPage />
           </Route>
-          <Route path="/product/create">
+          {/* <Route path="/product/create">
             <CreateProducts />
           </Route>
           <Route path='/product'>
             <ShowProducts />
-          </Route>
-          <Route path="/keranjang">
+          </Route> */}
+          <Route path="/cart">
             <NavbarPage />
             <KeranjangPage />
           </Route>
-          <Route path="/produk">
+          <Route path={ `/product` }>
             <NavbarPage />
             <ProdukPage />
             <FooterPage />
@@ -61,12 +69,9 @@ function App() {
             <ListPage />
             <FooterPage />
           </Route>
-          <Route path="/seller/create">
+          {/* <Route path="/seller/create">
             <CreateSeller />
-          </Route>
-          <Route >
-            
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </div>

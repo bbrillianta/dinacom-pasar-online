@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { SERVER_HOST } from '../config.js';
 import { Container, Row, Col, CardDeck, Card, Button, CardColumns} from 'react-bootstrap';
 import buah from '../asset/KategoriBuah2.png';
 import sayur from '../asset/KategoriSayur2.png';
@@ -11,6 +12,45 @@ import gambar from '../asset/Iklan.jpg';
 import '../css/HomePage.css';
 
 const HomePage = () => {
+    const [popularProducts, setPopularProducts] = useState([]);
+    const [recommendedProducts, setRecommendedProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
+
+    useEffect(() => {
+        fetch(`${ SERVER_HOST }/product/popular`)
+        .then(res => res.json())
+        .then(data => setPopularProducts(data.foundDocs));
+
+        fetch(`${ SERVER_HOST }/product/recommended`)
+        .then(res => res.json())
+        .then(data => setRecommendedProducts(data.foundDocs));
+
+        fetch(`${ SERVER_HOST }/product`)
+        .then(res => res.json())
+        .then(data => { 
+            const sample = data.foundDocs.slice(0, 15);
+            console.log(sample);
+            setAllProducts(sample); 
+        });
+    }, [setPopularProducts, setRecommendedProducts]);
+
+    const productCard =(item, index) => {
+        return ( <Card key={ index } className="product">
+            <Card.Img variant="top" src={ `${ SERVER_HOST }/${ item.img.path }`} className="produk"/>
+            <Card.Body>
+                <Card.Title className="text-truncate m-0">
+                    { item.name }
+                </Card.Title>
+                <small>{ item.seller.name }</small>
+                <Card.Text className="mt-3">
+                    <b>Rp { item.price }</b>/kg
+                </Card.Text>
+                <Button variant="success" style={{width: "100%"}}>BELI</Button>
+            </Card.Body>
+        </Card> 
+        )
+    }
+
     return (
         <Container>
             <Row className="justify-content-center namakategori">
@@ -20,365 +60,46 @@ const HomePage = () => {
                 <a href=""><img className="homekategori mr-2" src={buah}></img></a>
                 <a href=""><img className="homekategori ml-2" src={sayur}></img></a>
             </Row>
-            <Row className="namelist">
+
+            {/***  Produk terlaris */}
+            <Row className="namelist justify-content-between align-items-center pl-4 pr-5">
                 <h4><b>Produk Terlaris</b></h4>
+                <a><small>Lihat Semua</small></a>
+            </Row>
+            <Row className="justify-content-center">
+                {
+                    popularProducts.map((item, index) => 
+                        productCard(item, index)
+                    )
+                }
             </Row>
             
-            <Row className="mt-2 justify-content-center">
-                <Card className="product">
-                    <Card.Img variant="top" src={apel} className="produk"/>
-                    <Card.Body>
-                        <Card.Title>Apel Manalagi</Card.Title>
-                        <Card.Text>
-                            <b>Rp. 12.000</b>/kg
-                        </Card.Text>
-                        <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                    </Card.Body>
-                </Card>
-                <Card className="product">
-                    <Card.Img variant="top" src={sawi} className="produk"  />
-                    <Card.Body>
-                        <Card.Title>Apel Manalagi</Card.Title>
-                        <Card.Text>
-                            <b>Rp. 12.000</b>/kg
-                        </Card.Text>
-                        <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                    </Card.Body>
-                    {/* <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer> */}
-                </Card>
-                <Card className="product">
-                    <Card.Img variant="top" src={wortel} className="produk"  />
-                    <Card.Body>
-                        <Card.Title>Apel Manalagi</Card.Title>
-                        <Card.Text>
-                            <b>Rp. 12.000</b>/kg
-                        </Card.Text>
-                        <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                    </Card.Body>
-                    {/* <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer> */}
-                </Card>
-                <Card className="product">
-                    <Card.Img variant="top" src={apel} className="produk"  />
-                    <Card.Body>
-                        <Card.Title>Apel Manalagi</Card.Title>
-                        <Card.Text>
-                            <b>Rp. 12.000</b>/kg
-                        </Card.Text>
-                        <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                    </Card.Body>
-                    {/* <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer> */}
-                </Card>
-                <Card className="product">
-                    <Card.Img variant="top" src={alpukat} className="produk"  />
-                    <Card.Body>
-                        <Card.Title>Apel Manalagi</Card.Title>
-                        <Card.Text>
-                            <b>Rp. 12.000</b>/kg
-                        </Card.Text>
-                        <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                    </Card.Body>
-                    {/* <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer> */}
-                </Card>
-            </Row>
-
-            <Row>
+            {/***  Produk pilihan */}
+            <Row className="mt-5 justify-content-between align-items-center pl-4 pr-5">
                 <h4><b>Produk Pilihan</b></h4>
+                <a><small>Lihat Semua</small></a>
             </Row>
-            <Row className="mt-2">
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"/>
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    
-                    <Card>
-                        <Card.Img variant="top" src={sawi} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={wortel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={alpukat} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                </CardDeck>
+            <Row className="justify-content-center">
+            {
+                    recommendedProducts.map((item, index) => 
+                        productCard(item, index)
+                    )
+                }
             </Row>
 
-            <Row className="mt-2">
+            <Row className="my-5">
                 <Col>
                         <img className="iklan2" src={gambar}></img>
                 </Col>
             </Row>
-
-            <Row className="mt-2">
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"/>
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    
-                    <Card>
-                        <Card.Img variant="top" src={sawi} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={wortel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={alpukat} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                </CardDeck>
-            </Row>
-
-            <Row className="mt-2">
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"/>
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    
-                    <Card>
-                        <Card.Img variant="top" src={sawi} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={wortel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={alpukat} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                </CardDeck>
-            </Row>
-            <Row className="mb-5">
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"/>
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    
-                    <Card>
-                        <Card.Img variant="top" src={sawi} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={wortel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={alpukat} className="produk"  />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi</Card.Title>
-                            <Card.Text>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{width: "100%"}}>BELI</Button>
-                        </Card.Body>
-                        {/* <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer> */}
-                    </Card>
-                </CardDeck>
+            
+            {/*** Semua produk */}
+            <Row className="mt-2 justify-content-center">
+                {
+                    allProducts.map((item, index) => 
+                        productCard(item, index)
+                    )
+                }
             </Row>
         </Container>
     );

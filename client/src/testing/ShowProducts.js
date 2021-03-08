@@ -14,7 +14,7 @@ const ShowProducts = () => {
         <div>
             {
                 products.map((item, index) =>
-                    <Card key={ index } style={{ width: '18rem' }}>
+                    <Card key={ index } className="product h-100">
                         <Card.Img variant="top" src={ `http://localhost:3001/${ item.img.path }` }  />
                         <Card.Body>
                             <Card.Title>{ item.name }</Card.Title>
