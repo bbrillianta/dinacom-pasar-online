@@ -5,6 +5,7 @@ import backicon from '../asset/backicon.png';
 import satu from '../asset/satu.png';
 import plus from '../asset/plus.png';
 import dua from '../asset/dua.png';
+import edit from '../asset/pencil.png';
 import hijau from '../asset/hijau.png';
 import tiga from '../asset/tiga.png';
 import tomat from '../asset/tomat.jpg';
@@ -29,7 +30,7 @@ const CheckoutPage = () => {
                                 <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Alamat Pengiriman</h6>
                             </div>
 
-                            <div className="kotaksatu mr-auto">
+                            <div className="kotaksatu d-flex justify-content-start justify-content-center">
                                 <div className="d-inline-block kotaksatu1 mr-auto">
                                     <div className="d-inline-block">
                                         <div className="namatujuan"><h5><b>Mega Darta</b></h5></div>
@@ -37,6 +38,7 @@ const CheckoutPage = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div className="mr-auto textsatu">
                             <Image src={dua} className="d-inline-block align-center satu" roundedCircle />

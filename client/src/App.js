@@ -48,6 +48,7 @@ function App() {
             <ShowProducts />
           </Route>
           <Route path="/keranjang">
+            <NavbarPage />
             <KeranjangPage />
           </Route>
           <Route path="/produk">
