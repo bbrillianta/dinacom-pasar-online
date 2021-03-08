@@ -11,7 +11,9 @@
     border-top: 10px solid #529f1f;
     background-color: white;
 }
-
+.edit{
+    color: #B1B1B1;
+}
 .backicon{
     width: 5vh;
 }
@@ -31,7 +33,6 @@
 .kotaksatu{
     border-left-style: dashed;
     border-left-color: #529f1f;
-    height: 30vh;
     margin-left: 4.6vh;
 }
 .kotakdua{
@@ -68,7 +69,6 @@
     height: 100%;
 }
 .kotaksatu3{
-    margin-left: 5vh;
     border-style: solid;
     border-color: #F6F6F6;
     width: 25%;
@@ -82,9 +82,7 @@
     width: 25%;
     height: 100%;
 }
-.namatujuan{
-    margin: 3vh;
-}
+
 
 .alamattujuan{
     margin: 3vh;
