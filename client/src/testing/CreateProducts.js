@@ -10,6 +10,7 @@ const CreateProducts = () => {
         .then(response => response.json())
         .then(data => {
             const { foundDocs } = data;
+            setInputs({ category: "Sayur", seller: foundDocs[0]._id });
             setInputs({ seller: foundDocs[0]._id });
             setSellers(data.foundDocs);
         });
