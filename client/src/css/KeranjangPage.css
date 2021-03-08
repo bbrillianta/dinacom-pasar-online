@@ -1,0 +1,71 @@
+body{
+    background-color: #f6f6f6;
+}
+.refresh{
+    width: 20px;   
+}
+.top:link{
+    text-decoration: none;
+}
+.boxkeranjang{
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background-color: white;
+}
+.boxharga{
+    margin-bottom: 50px;
+    background-color: white;
+    padding: 20px;
+}
+.keranjangatas{
+    background-color: #529F1F;
+    color: white;
+}
+.keranjangbawah{
+    padding: 45px;    
+    border: 1px solid black;
+    box-shadow: -1px 3px 1px rgba(0,0,0,0.1);
+}
+.imgprodukkeranjang{
+    width: 150px;
+}
+.hargakeranjang{
+    color: red;
+}
+.hargakeranjangg{
+    color: black;
+}
+.kotaksatuu{
+    border-radius: 1;
+    border-style: solid;
+    border-color: red;
+    height: 150px;
+    
+}
+.kotakduaa{
+    border-radius: 1;
+    border-style: solid;
+    border-color: #529F1F;
+    height: 150px;
+}
+.tawar{
+    border-radius: 1;
+    border-style: solid;
+    padding: 5px;
+    
+}
+.gambarsampah{
+    width: 30px;
+}
+.diskonkeranjang{
+    color: red;
+    
+    text-decoration: line-through;
+}
+.jumlahdiskokeranjang{
+    color: #529F1F;
+    font-size: 15px;
+}
+.placetext{
+    width: 100px;
+}
