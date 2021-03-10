@@ -18,16 +18,15 @@ class ProductController {
         //Memilih data yang diurutkan dari jumlah pembelian terbesar dan dipilih sebanyak 5
         const foundDocs = await this.#ProductModel.find({})
         .populate('seller')
-        .sort({ sold: 'desc' })
-        .limit(5);
+        .sort({ sold: 'desc' });
 
         res.json({ success: true, foundDocs });
     }
 
     getRecommended = async (req, res) => {
+        let docCnt = await  this.#ProductModel.countDocuments();
         //Memilih data secara acak sebanyak 5
-        let foundDocs = await this.#ProductModel.aggregate([{ $sample: { size: 5 } }])
-        .limit(5)
+        let foundDocs = await this.#ProductModel.aggregate([{ $sample: { size: docCnt } }])
         .exec();
 
         //Populate field seller
@@ -39,6 +38,24 @@ class ProductController {
     getAll = async (req, res) => {
         const foundDocs = await this.#ProductModel.find({}).populate('seller');
         
+        res.json({ success: true, foundDocs });
+    }
+
+    getProduct = async (req, res) => {
+        const { p } = req.query || 0;
+
+        //Mencari produk yang ID nya query url p
+        const foundDoc = await this.#ProductModel.findById(p).populate('seller');
+
+        res.json({ success: true, foundDoc });
+    }
+
+    getCategory = async (req, res) => {
+        const { q } = req.query || "";
+
+        //Mencari produk berdasarkan kategorinya
+        const foundDocs = await this.#ProductModel.find({ category: q }).populate('seller');
+
         res.json({ success: true, foundDocs });
     }
 

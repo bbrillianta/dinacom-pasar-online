@@ -11,7 +11,7 @@ import sayur from '../asset/KategoriSayur2.png';
 
 const FooterPage = () => {
     return (
-        <Card.Footer className="text-muted">
+        <Card.Footer className="text-muted mt-5">
             <div className="footer1 d-flex flex-column justify-content-center">
                 <div className="baris1">
                     <a><Image className="ig mx-2" src={gg} roundedCircle /></a>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Carousel, Form, Navbar, Nav, FormControl, NavDropdown, InputGroup, Button, Image } from 'react-bootstrap';
 import gambar from '../asset/Iklan.jpg';
+import gambar2 from '../asset/Iklan2.jpg';
+import gambar3 from '../asset/Iklan3.jpg';
 import gambartas from '../asset/shopping-bag-icon.png';
 import mega from '../asset/mega1.jpg';
 
@@ -22,7 +24,7 @@ const CarouselPage = () => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src={gambar}
+                    src={gambar2}
                     alt="Second slide"
                 />
 
@@ -34,7 +36,7 @@ const CarouselPage = () => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src={gambar}
+                    src={gambar3}
                     alt="Third slide"
                 />
                 <Carousel.Caption>

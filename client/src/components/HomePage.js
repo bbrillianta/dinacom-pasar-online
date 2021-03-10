@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { SERVER_HOST } from '../config.js';
 import { Container, Row, Col, CardDeck, Card, Button, CardColumns} from 'react-bootstrap';
-import buah from '../asset/KategoriBuah2.png';
-import sayur from '../asset/KategoriSayur2.png';
+import buah from '../asset/KategoriBuah3.jpg';
+import sayur from '../asset/KategoriSayur3.jpg';
 import apel from '../asset/gambar-apel-hijau-1.jpg';
 import sawi from '../asset/Caisim-003_stokpangan.com_.jpg';
 import wortel from '../asset/wortel-import-fp.jpg'
 import strawberry from '../asset/product-packshot-strawberrie-558x600.jpg';
 import alpukat from '../asset/Alpukat-Muda.jpg';
 import gambar from '../asset/Iklan.jpg';
+import gambar3 from '../asset/Iklan3.jpg';
 import '../css/HomePage.css';
+import ProductCard from './ProductCard';
 
 const HomePage = () => {
     const [popularProducts, setPopularProducts] = useState([]);
@@ -19,11 +21,17 @@ const HomePage = () => {
     useEffect(() => {
         fetch(`${ SERVER_HOST }/product/popular`)
         .then(res => res.json())
-        .then(data => setPopularProducts(data.foundDocs));
+        .then(data => { 
+            const sample = data.foundDocs.slice(0, 5);
+            setPopularProducts(sample); 
+        });
 
         fetch(`${ SERVER_HOST }/product/recommended`)
         .then(res => res.json())
-        .then(data => setRecommendedProducts(data.foundDocs));
+        .then(data =>  { 
+            const sample = data.foundDocs.slice(0, 5);
+            setRecommendedProducts(sample); 
+        });
 
         fetch(`${ SERVER_HOST }/product`)
         .then(res => res.json())
@@ -32,24 +40,9 @@ const HomePage = () => {
             console.log(sample);
             setAllProducts(sample); 
         });
-    }, [setPopularProducts, setRecommendedProducts]);
+    }, [setPopularProducts, setAllProducts, setRecommendedProducts ]);
 
-    const productCard =(item, index) => {
-        return ( <Card key={ index } className="product">
-            <Card.Img variant="top" src={ `${ SERVER_HOST }/${ item.img.path }`} className="produk"/>
-            <Card.Body>
-                <Card.Title className="text-truncate m-0">
-                    { item.name }
-                </Card.Title>
-                <small>{ item.seller.name }</small>
-                <Card.Text className="mt-3">
-                    <b>Rp { item.price }</b>/kg
-                </Card.Text>
-                <Button variant="success" style={{width: "100%"}}>BELI</Button>
-            </Card.Body>
-        </Card> 
-        )
-    }
+    
 
     return (
         <Container>
@@ -57,19 +50,19 @@ const HomePage = () => {
                 <h4><b>Kategori Belanja</b></h4>
             </Row>
             <Row className="justify-content-center kategoribelanja">
-                <a href=""><img className="homekategori mr-2" src={buah}></img></a>
-                <a href=""><img className="homekategori ml-2" src={sayur}></img></a>
+                <a href="/products?q=buah"><img className="homekategori" src={buah}></img></a>
+                <a href="/products?q=sayur"><img className="homekategori" src={sayur}></img></a>
             </Row>
 
             {/***  Produk terlaris */}
-            <Row className="namelist justify-content-between align-items-center pl-4 pr-5">
+            <Row className="namelist justify-content-between align-items-center mt-5 pl-4 pr-5">
                 <h4><b>Produk Terlaris</b></h4>
-                <a><small>Lihat Semua</small></a>
+                <a href="/products?q=popular"><small>Lihat Semua</small></a>
             </Row>
             <Row className="justify-content-center">
                 {
-                    popularProducts.map((item, index) => 
-                        productCard(item, index)
+                    popularProducts.map((item, index) =>
+                        <ProductCard item={item} index={index} />
                     )
                 }
             </Row>
@@ -77,19 +70,19 @@ const HomePage = () => {
             {/***  Produk pilihan */}
             <Row className="mt-5 justify-content-between align-items-center pl-4 pr-5">
                 <h4><b>Produk Pilihan</b></h4>
-                <a><small>Lihat Semua</small></a>
+                <a href="/products?q=recommended"><small>Lihat Semua</small></a>
             </Row>
             <Row className="justify-content-center">
             {
                     recommendedProducts.map((item, index) => 
-                        productCard(item, index)
+                        <ProductCard item={item} index={index} />
                     )
                 }
             </Row>
 
             <Row className="my-5">
                 <Col>
-                        <img className="iklan2" src={gambar}></img>
+                        <img className="iklan2" src={gambar3}></img>
                 </Col>
             </Row>
             
@@ -97,9 +90,12 @@ const HomePage = () => {
             <Row className="mt-2 justify-content-center">
                 {
                     allProducts.map((item, index) => 
-                        productCard(item, index)
+                        <ProductCard item={item} index={index} />
                     )
                 }
+            </Row>
+            <Row className="justify-content-center mt-5">
+                <a href="/products"><Button variant="ijo" style={{width: "400px"}}>LIHAT LAINNYA</Button></a>
             </Row>
         </Container>
     );

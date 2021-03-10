@@ -19,17 +19,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useLocation
 } from "react-router-dom";
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-}
-
 function App() {
-  // const query = useQuery();
-  // const [queryProduct, setQueryProduct] = useState(null)
-
   return (
     <div className="App">
       <Router>
@@ -59,12 +51,12 @@ function App() {
             <NavbarPage />
             <KeranjangPage />
           </Route>
-          <Route path={ `/product` }>
+          <Route path="/product">
             <NavbarPage />
             <ProdukPage />
             <FooterPage />
           </Route>
-          <Route path="/list">
+          <Route path="/products">
             <NavbarPage />
             <ListPage />
             <FooterPage />

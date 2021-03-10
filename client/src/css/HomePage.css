@@ -3,11 +3,17 @@
     width: 10vh;
 }
 .homekategori{
-    /* border-color: #529F1F; */
-    border: 3px solid #529F1F;
-    border-radius: .25rem;
-    width: 200px;
+    width: 300px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
 }
+
+.homekategori:hover{
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
 .namakategori{
     margin-top: 8vh;
     margin-bottom: 2vh;

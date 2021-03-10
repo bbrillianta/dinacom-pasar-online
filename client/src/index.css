@@ -111,6 +111,17 @@ code {
   display: none;
 }
 
+.btn-ijo {
+  color: white;
+  border-color: #529F1F;
+  background-color: #529F1F!important;
+}
+
+.btn-ijo:hover {
+  color: white;
+  border-color: green;
+  background-color: green!important;
+}
 
 
 @media (max-width: 1000px) {

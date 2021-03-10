@@ -8,6 +8,10 @@ const productRouter = (ProductModel, SellerModel) => {
 
     router.get('/', productController.getAll);
 
+    router.get('/query', productController.getProduct);
+
+    router.get('/category', productController.getCategory);
+
     router.get('/popular', productController.getPopular);
 
     router.get('/recommended', productController.getRecommended);

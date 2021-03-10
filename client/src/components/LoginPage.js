@@ -36,7 +36,7 @@ const LoginPage = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control className="login-field" onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
-                    <Button variant="button1" type="submit" className="mt-4" >LOGIN</Button>
+                    <Button variant="ijo" type="submit" className="mt-4" >LOGIN</Button>
                 </Form>
                 <p>Belum mempunyai akun? <a href="/register" style={{ color: "#529F1F" }}><b>Register</b></a></p>
             </Col>

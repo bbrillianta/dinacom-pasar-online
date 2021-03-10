@@ -8,23 +8,23 @@ import '../css/Navbar.css';
 
 const NavbarPage = () => {
     return (
-        <Navbar bg="light" expand="lg" sticky="top">
-            <Navbar.Brand href="/">
+        <Navbar className="p-3 dosar-nav" bg="light" expand="lg" sticky="top">
+            <Navbar.Brand href="/" className="">
                 <img
                     src={gambar}
                     width="150"
-                    className="d-inline-block align-top"
+                    className="d-inline-block align-top mx-2"
                     alt="DOSAR"
                 />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Form inline className="mx-auto" >
-                    <FormControl type="text" placeholder="Search" className="searchbar"/>
-                    <Button variant="outline-success">Search</Button>
+                <Form inline className="mx-auto" className="searchbar mx-auto">
+                    <FormControl type="text" placeholder="Search" className="searchtxt"/>
+                    <Button className="searchbtn">Search</Button>
                 </Form>
                 <Nav className="ml-auto mr-5">
-                    <Nav.Link href="#home" className="d-flex align-items-center mr-5">
+                    <Nav.Link href="/cart" className="d-flex align-items-center mr-5">
                         <img
                             src={gambartas}
                             width="30px"
@@ -40,7 +40,8 @@ const NavbarPage = () => {
                     <NavDropdown title=
                             { <Image width="35" src={mega} roundedCircle /> }
                     id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1">Register</NavDropdown.Item>
                         {/* <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item> */}
                     </NavDropdown>

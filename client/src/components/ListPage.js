@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Container, Card, CardDeck, Button } from 'react-bootstrap';
+import { SERVER_HOST } from '../config.js';
 import sayur from '../asset/KategoriSayur2.png';
 import apel from '../asset/gambar-apel-hijau-1.jpg';
 import sawi from '../asset/Caisim-003_stokpangan.com_.jpg';
@@ -8,187 +9,72 @@ import strawberry from '../asset/product-packshot-strawberrie-558x600.jpg';
 import alpukat from '../asset/Alpukat-Muda.jpg';
 import backicon from '../asset/backicon.png';
 import '../css/ListPage.css';
-
+import ProductCard from './ProductCard.js';
 
 const ListPage = () => {
+    const [products, setProducts] = useState([]);
+    const [title, setTitle] = useState("");
+
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        const query = url.searchParams.get("q");
+
+        if(query === "popular") {
+            fetch(`${ SERVER_HOST }/product/popular`)
+            .then(res => res.json())
+            .then(data => { 
+                const sample = data.foundDocs;
+                setProducts(sample); 
+            });
+            setTitle("Produk Terlaris");
+        } else if(query === "recommended") {
+            fetch(`${ SERVER_HOST }/product/recommended`)
+            .then(res => res.json())
+            .then(data =>  { 
+                const sample = data.foundDocs;
+                setProducts(sample); 
+            });
+            setTitle("Produk Pilihan");
+        } else if(query === "sayur") {
+            fetch(`${ SERVER_HOST }/product/category?q=Sayur`)
+            .then(res => res.json())
+            .then(data =>  { 
+                const sample = data.foundDocs;
+                setProducts(sample); 
+            });
+            setTitle("Produk Sayuran");
+        } else if(query === "buah") {
+            fetch(`${ SERVER_HOST }/product/category?q=Buah`)
+            .then(res => res.json())
+            .then(data =>  { 
+                const sample = data.foundDocs;
+                setProducts(sample); 
+            });
+            setTitle("Produk Buah-buahan");
+        } else {
+            fetch(`${ SERVER_HOST }/product/`)
+            .then(res => res.json())
+            .then(data =>  { 
+                const sample = data.foundDocs;
+                setProducts(sample); 
+            });
+            setTitle("Semua Produk");
+        }
+    }, [setProducts, setTitle]);
+
     return (
         <Container>
-            <Row className="listatas">
-                <Col>
-                    <a href="/"><img className="backicon" src={backicon}></img></a>
-                </Col>
-                <Col><h5><b>Produk Terlaris</b></h5></Col>
+            <Row className="mt-3">
+                <a href="/" className="ml-4" style={{ position: "absolute" }}><img width="30"  src={backicon}></img></a>
+                <h5 className="align-self-center mx-auto mt-1"><b >{ title }</b></h5>
             </Row>
-            <Row className="list-produk1">
-                <CardDeck>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                            </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-                </CardDeck>
-
+            <Row className="justify-content-center">
+                {
+                    products.map((item, index) => 
+                        <ProductCard item={item} index={index} />
+                    )
+                } 
             </Row>
-            <Row className="list-produk1">
-                <CardDeck>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                           </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                           </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                           </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                           </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Img variant="top" src={apel} className="produk" />
-                        <Card.Body>
-                            <Card.Title>Apel Manalagi<br></br>
-                                <text className="namapenjual">Mega</text><br></br>
-                            </Card.Title>
-
-                            <Card.Text>
-                                <text className="jumlahterjual"><b>1000 terjual</b></text><br></br>
-                                <text className="harganormal">Rp. 32.000 </text><text className="diskon">(Diskon 15%)</text><br></br>
-                                <b>Rp. 12.000</b>/kg
-                           </Card.Text>
-                            <Button variant="success" style={{ width: "100%" }}>BELI</Button>
-                        </Card.Body>
-                    </Card>
-                </CardDeck>
-            </Row>
-
         </Container>
     );
 };

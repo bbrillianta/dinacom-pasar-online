@@ -48,7 +48,7 @@ const RegisterPage = () => {
                         <Form.Label>VERIFY PASSWORD</Form.Label>
                         <Form.Control className="login-field" onChange={e => setConfirm(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
-                    <Button variant="button1" type="submit" className="mt-4" >REGISTER</Button>
+                    <Button variant="ijo" type="submit" className="mt-4" >REGISTER</Button>
                 </Form>
                 <p>Sudah mempunyai akun? <a href="/login" style={{ color: "#529F1F" }}><b>Login</b></a></p>
             </Col>
