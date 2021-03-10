@@ -11,6 +11,7 @@ import sawi from '../asset/Caisim-003_stokpangan.com_.jpg';
 import wortel from '../asset/wortel-import-fp.jpg'
 import strawberry from '../asset/product-packshot-strawberrie-558x600.jpg';
 import alpukat from '../asset/Alpukat-Muda.jpg';
+import ProductCard from './ProductCard';
 
 const ProdukPage = () => {
     const [product, setProduct] = useState({});
@@ -34,28 +35,11 @@ const ProdukPage = () => {
         });
     }, [setProduct, setRecommendedProducts]);
 
-    const productCard =(item, index) => {
-        return ( <Card key={ index } className="product">
-            <Card.Img variant="top" src={ `${ SERVER_HOST }/${ item.img.path }`} className="produk"/>
-            <Card.Body>
-                <Card.Title className="text-truncate m-0">
-                    { item.name }
-                </Card.Title>
-                <small>{ item.seller.name }</small>
-                <Card.Text className="mt-3">
-                    <b>Rp { item.price }</b>/kg
-                </Card.Text>
-                <Button variant="success" style={{width: "100%"}}>BELI</Button>
-            </Card.Body>
-        </Card> 
-        )
-    }
-
     return (
         <Container>
             <Row className="justify-content-md-center produk mt-5">
                 <Col lg="6">
-                    <img src={ `${SERVER_HOST}/${product.img?.path}` } 
+                    <img src={ `${SERVER_HOST}/${product.img?.path}.jpg` } 
                     height="374" style={{ objectFit: "cover" }} className="fotoproduk w-100"></img>
                 </Col>
                 <Col lg="6">
@@ -65,7 +49,7 @@ const ProdukPage = () => {
                                 <h3 className="mb-0"><b>{ product.name }</b></h3>
                                 <p>{ product.stock }kg</p>
                             </div>
-                            <Image width="50" height="50" style={{ objectFit: "cover" }} src={ `${SERVER_HOST}/${product.seller?.picture.path}`} roundedCircle />
+                            <Image width="50" height="50" style={{ objectFit: "cover" }} src={ `${SERVER_HOST}/${product.seller?.picture.path}.jpg`} roundedCircle />
                         </div>
                         <p className="mt-4"><b style={{fontSize: "30px"}}>Rp. { product.price }</b>/kg</p>
                         <p>Kuantitas</p>
@@ -123,7 +107,7 @@ const ProdukPage = () => {
             <Row className="justify-content-center">
                 {
                     recommendedProducts.map((item, index) => 
-                        productCard(item, index)
+                        <ProductCard item={item} index={index} />
                     )
                 }
             </Row>
