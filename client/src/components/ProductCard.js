@@ -4,7 +4,7 @@ import { SERVER_HOST } from '../config.js';
 const ProductCard = (props) => {
     return ( <Card key={ props.index } className="product">
         <a href={ `/product?p=${ props.item._id }` }>
-            <Card.Img variant="top" src={ `${ SERVER_HOST }/${ props.item.img.path }`} className="produk"/>
+            <Card.Img variant="top" src={ `${ SERVER_HOST }/${ props.item.img.path }.jpg`} className="produk"/>
         </a>
         <Card.Body>
             <Card.Title className="text-truncate m-0">

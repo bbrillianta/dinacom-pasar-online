@@ -21,60 +21,69 @@ const KeranjangPage = () => {
             <div className="boxkeranjang">
                 <div className="d-flex justify-content-center keranjangatas"><b>DAFTAR BELANJAAN</b></div>
                 <div className="justify-content-center keranjangbawah">
-                    <div class="d-flex bd-highlight kotaksatuu">
-                        <div class="p-2 bd-highlight mt-2">
-                            <img src={tomat} className="imgprodukkeranjang"></img>
-                        </div>
-                        <div class="p-2 bd-highlight mt-4">
-                            <div><b>Tomat Merah Besar</b></div>
-                            <div className="d-flex justify-content-start">
-                                <div className="hargakeranjang mt-2 mr-2"><b> Rp. 81.600 </b></div>
-                                <div className="mt-2 mr-2"><b>  > > > > > >  </b></div>
-                                <div className="tawar">Rp. 80.000</div>
+
+                    {/* Tawaran proses */}
+                    <div className="d-flex justify-content-between bd-highlight kotaksatuu">
+                        <div className="d-flex align-items-center">
+                            <div class="bd-highlight">
+                                <img src={tomat} className="imgprodukkeranjang"></img>
+                            </div>
+                            <div class="bd-highlight">
+                                <div><b>Tomat Merah Besar</b></div>
+                                <div className="d-flex align-items-center">
+                                    <div className="hargakeranjang"><b> Rp. 81.600 </b></div>
+                                    <b>  > > > > > >  </b>
+                                    <div className="tawar">Rp. 80.000</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="ms-auto p-2 bd-highlight mt-5"><img src={danger} className="gambarsampah"></img></div>
+                        <div class="bd-highlight d-flex align-items-center"><img src={danger} className="gambarsampah"></img></div>
                     </div>
 
-                    <div class="d-flex bd-highlight mt-4 kotakduaa">
-                        <div class="p-2 bd-highlight mt-2">
-                            <img src={tomat} className="imgprodukkeranjang"></img>
-                        </div>
-                        <div class="p-2 bd-highlight mt-2">
-                            <div><b>Jeruk Manis</b></div>
-                            <div className="d-flex justify-content-start">
-                                <div className=" mt-2 mr-2"><b className="hargakeranjangg"> Rp. 18.000 </b>/kg</div>
-                                <div className="mt-2 mr-2 diskonkeranjang"><b>  Rp. 32.000 </b></div>
-                                <div className="jumlahdiskokeranjang mt-2"><b>(Diskon 15%)</b></div>
+                    {/* Beli biasa */}
+                    <div className="d-flex justify-content-between bd-highlight mt-4 kotakduaa">
+                        <div className="d-flex align-items-center">
+                            <div className="bd-highlight">
+                                <img src={tomat} className="imgprodukkeranjang"></img>
                             </div>
-                            <div class="d-flex flex-row bd-highlight mb-3">
-                                <div class="p-2 bd-highlight"> <Button variant="outline-danger">-</Button></div>
-                                <div class="p-2 bd-highlight"><FormControl className="text-center placetext" placeholder="1"/></div>
-                                <div class="p-2 bd-highlight"><Button variant="outline-secondary">+</Button></div>
-                            </div>
-                            
+                            <div class="bd-highlight">
+                                <div><b>Jeruk Manis</b></div>
+                                <div className="d-flex align-items-center">
+                                    <div><b className="hargakeranjangg"> Rp. 18.000 </b>/kg</div>
+                                    <div className="diskonkeranjang"><b>  Rp. 32.000 </b></div>
+                                    <div className="jumlahdiskokeranjang"><b>(Diskon 15%)</b></div>
+                                </div>
+                                <div class="d-flex bd-highlight">
+                                    <div className="bd-highlight"> <Button variant="outline-danger">-</Button></div>
+                                    <div className="bd-highlight"><FormControl className="text-center placetext" placeholder="1"/></div>
+                                    <div className="bd-highlight"><Button variant="outline-secondary">+</Button></div>
+                                </div>
+                            </div>    
                         </div>
-                        <div class="ms-auto p-2 bd-highlight mt-5"><img src={del} className="gambarsampah"></img></div>
+                        <div className="bd-highlight d-flex align-items-center"><img src={del} className="gambarsampah"></img></div>
                     </div>
 
-                    <div class="d-flex bd-highlight mt-4 kotakduaa">
-                        <div class="p-2 bd-highlight mt-2">
-                            <img src={tomat} className="imgprodukkeranjang"></img>
-                        </div>
-                        <div class="p-2 bd-highlight mt-2">
-                            <div><b>Nanas</b></div>
-                            <div className="d-flex justify-content-start">
-                                <div className=" mt-2 mr-2"><b className="hargakeranjangg"> Rp. 18.000 </b>/kg</div>
-                                <div className="mt-2 mr-2 diskonkeranjang"><b>  Rp. 32.000 </b></div>
-                                <div className="jumlahdiskokeranjang mt-2"><b>Tawaran Diterima</b></div>
+                    {/* Tawaran diterima */}
+                    <div className="d-flex justify-content-between bd-highlight mt-4 kotakduaa">
+                        <div className="d-flex align-items-center">
+                            <div className="bd-highlight">
+                                <img src={tomat} className="imgprodukkeranjang"></img>
                             </div>
-                            <div class="d-flex flex-row bd-highlight mb-3">
-                                <div class="p-2 bd-highlight"> <Button variant="outline-danger">-</Button></div>
-                                <div class="p-2 bd-highlight"><FormControl className="text-center placetext" placeholder="1"/></div>
-                                <div class="p-2 bd-highlight"><Button variant="outline-secondary">+</Button></div>
-                            </div>
+                            <div className="bd-highlight">
+                                <div><b>Nanas</b></div>
+                                <div className="d-flex align-items-center">
+                                    <div className=" "><b className="hargakeranjangg"> Rp. 18.000 </b>/kg</div>
+                                    <div className="diskonkeranjang"><b>  Rp. 32.000 </b></div>
+                                    <div className="jumlahdiskokeranjang"><b>Tawaran Diterima</b></div>
+                                </div>
+                                <div className="d-flex bd-highlight">
+                                    <div className="bd-highlight"> <Button variant="outline-danger">-</Button></div>
+                                    <div className="bd-highlight"><FormControl className="text-center placetext" placeholder="1"/></div>
+                                    <div className="bd-highlight"><Button variant="outline-secondary">+</Button></div>
+                                </div>
+                            </div>                       
                         </div>
-                        <div class="ms-auto p-2 bd-highlight mt-5"><img src={del} className="gambarsampah"></img></div>
+                        <div className="bd-highlight d-flex align-items-center"><img src={del} className="gambarsampah"></img></div>
                         
                     </div>
                 </div>
