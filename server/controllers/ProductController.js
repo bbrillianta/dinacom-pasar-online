@@ -58,7 +58,7 @@ class ProductController {
 
         res.json({ success: true, foundDocs });
     }
-
+    
     create = async (req, res) => {
         const { name, price, seller, minPrice, stock, category} = req.body;
         const { file } = req;

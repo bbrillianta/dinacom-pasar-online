@@ -38,20 +38,14 @@
   border-radius: 20px;
 }
 
-.form-group {
-  width: 100%;
-  padding: 0 20px;
-}
-
-.form-label {
-  margin-left: 20px;
-  font-weight: 500;
-}
-
 .form-login {
   width: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.label-account {
+  font-weight: 500;
 }
 
 @media (max-width: 991px) {

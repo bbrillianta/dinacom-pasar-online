@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Container, Row, Image, FormControl, Button, InputGroup } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Col, Container, Row, Image, FormControl, Button, InputGroup, Modal, Form } from 'react-bootstrap';
 import '../css/CheckoutPage.css';
 import backicon from '../asset/backicon.png';
 import satu from '../asset/satu.png';
@@ -10,14 +10,32 @@ import hijau from '../asset/hijau.png';
 import tiga from '../asset/tiga.png';
 import tomat from '../asset/tomat.jpg';
 import lingkaran from '../asset/lingkaran.png';
+import cash from '../asset/cash.svg'
 
-const CheckoutPage = () => {
+const CheckoutPage = (props) => {
+    const [alamatInput, setAlamatInput] = useState(false);
+    const [showAlamat, setShowAlamat] = useState(false);
+    const [alamat, setAlamat] = useState({
+        name: '',
+        number: '',
+        address: ''
+    });
+
+    const handleClose = () => setAlamatInput(false);
+    const handleShow = () => setAlamatInput(true);
+
+    const submitAlamat = (e) => { 
+        e.preventDefault();
+        setShowAlamat(true);
+    }
+
     return (
         <Container className="checkout-page py-2 px-5" fluid>
             <Row>
                 <Col>
-                    <div>
-                        <img className="backicon" src={backicon}></img>Checkout Belanjaan
+                    <div className="d-flex align-items-center"> 
+                        <a href="/cart"><img width="30" src={backicon}></img></a>
+                        <div className="ml-2">Keranjang Belanjaan</div>
                     </div>
                 </Col>
             </Row>
@@ -25,112 +43,80 @@ const CheckoutPage = () => {
                 <Col lg="9">
                     <div className="left-col p-5">
                         <div>
-                            <div className="mr-auto textsatu">
+                            <div className="">
                                 <Image src={satu} className="d-inline-block align-center satu" roundedCircle />
-                                <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Alamat Pengiriman</h6>
+                                <h6 className="d-inline-block ml-4">Alamat Pengiriman</h6>
                             </div>
 
-                            <div className="kotaksatu d-flex justify-content-start justify-content-center">
-                                <div className="d-inline-block kotaksatu1 mr-auto">
-                                    <div className="d-inline-block">
-                                        <div className="namatujuan"><h5><b>Mega Darta</b></h5></div>
-                                        <div className="alamattujuan">Jl. Raya  Ds Takeranklating Kec Tikung Kabupaten Lamongan</div>
-                                    </div>
-                                </div>
+                            <div className="kotaksatu d-flex" >
+                                
+                                { showAlamat 
+                                    ?       <div className="ml-5 my-3 p-3 kotaksatu1">
+                                                <div className="">
+                                                    <div className="d-flex justify-content-between">
+                                                        <h5><b>{alamat.name}</b></h5>
+                                                        <a href="#" onClick={handleShow}>Edit</a>
+                                                    </div>
+                                                    <div >{ alamat.address }</div>
+                                                </div>
+                                            </div>
+
+                                    :       <a href="#" className="ml-5 my-3 kotakalamat p-3" onClick={handleShow}>
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <a className="btn btn-alamat rounded-circle px-3 mb-3"><h1 className="m-0">+</h1></a>
+                                                    <div>Tambahkan alamat</div>
+                                                </div>
+                                            </a>
+                                }
+                                
                             </div>
 
                         </div>
                         <div className="mr-auto textsatu">
                             <Image src={dua} className="d-inline-block align-center satu" roundedCircle />
-                            <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Total Pesanan</h6>
+                            <h6 className="d-inline-block align-center ml-4">Total Pesanan</h6>
                         </div>
                         <div className="kotakdua">
                             <div>
                                 <div className="kotakdua1">
-                                    <Row>
-                                        <Col md="3"><img src={tomat} className="gambarprodukco"></img></Col>
-                                        <Col md="9">
-                                            <Row>
-                                                <Col><b>Tomat Merah Besar</b></Col>
-                                            </Row>
-                                            <Row style={{ marginTop: "1vh" }}>
-                                                <Col><b>Rp. 27.200</b></Col>
-                                                <Col>Rp. 32.200</Col>
-                                                <Col>(Diskon 15%)</Col>
-                                            </Row>
-                                            <Row style={{ marginTop: "1vh", marginBottom: "2vh"}}>
-                                                <Col>
-                                                    <InputGroup style={{width: "20vh"}}>
-                                                        <Button variant="outline-danger">-</Button>
-                                                        <FormControl className="text-center"
-                                                           placeholder="1"
-                                                        />
-                                                        <InputGroup.Append>
-                                                            <Button variant="outline-secondary">+</Button>
-                                                        </InputGroup.Append>
-                                                    </InputGroup>
-                                                  </Col>
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                </div>
-
-                                <div className="kotakdua1" style={{marginTop: "10vh"}}>
-                                    <Row>
-                                        <Col md="3"><img src={tomat} className="gambarprodukco"></img></Col>
-                                        <Col md="9">
-                                            <Row>
-                                                <Col><b>Tomat Merah Besar</b></Col>
-                                            </Row>
-                                            <Row style={{ marginTop: "1vh" }}>
-                                                <Col><b>Rp. 27.200</b></Col>
-                                                <Col>Rp. 32.200</Col>
-                                                <Col>(Diskon 15%)</Col>
-                                            </Row>
-                                            <Row style={{ marginTop: "1vh", marginBottom: "2vh"}}>
-                                                <Col>
-                                                    <InputGroup style={{width: "20vh"}}>
-                                                        <Button variant="outline-danger">-</Button>
-                                                        <FormControl className="text-center"
-                                                           placeholder="1"
-                                                        />
-                                                        <InputGroup.Append>
-                                                            <Button variant="outline-secondary">+</Button>
-                                                        </InputGroup.Append>
-                                                    </InputGroup>
-                                                  </Col>
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                </div>
+                                    <div className="d-flex ml-5 py-3">
+                                        <img src={tomat}width="120"></img>
+                                        <div className="d-flex flex-column justify-content-center ml-4">
+                                            <div><b>Tomat Merah Besar</b></div>
+                                            <small className="my-1"><b>Jumlah: 2kg</b></small>
+                                            <h5><b>Rp. 27.200</b></h5>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
                         </div>
                         <div className="mr-auto textsatu">
                             <Image src={tiga} className="d-inline-block align-center satu" roundedCircle />
-                            <h6 className="d-inline-block align-center" style={{ marginLeft: "5vh" }}>Metode Pembayaran</h6>
+                            <h6 className="d-inline-block align-center ml-4">Metode Pembayaran</h6>
                         </div>
                         <div className="kotaktiga">
-                            <Row>
-                                <Col style={{ marginLeft: "80px", padding: "0" }}>
-                                    <input type="radio" name="pembayaran"></input>
-                                    {/* <Image src={hijau} className="d-inline-block align-center dua" roundedCircle />  */}
-                                    <h6 className="d-inline-block align-center ml-1">Bayar di tempat</h6>
-                                </Col>
-                                <Col>
-                                    <input type="radio" name="pembayaran"></input>
-                                    {/* <Image src={lingkaran} className="d-inline-block align-center dua" roundedCircle /> */}
-                                    <h6 className="d-inline-block align-center ml-1">Kartu Kredit</h6>
-                                </Col>
-                                <Col>
-                                    <input type="radio" name="pembayaran"></input>
-                                    <h6 className="d-inline-block align-center ml-1">M-Banking</h6>
-                                </Col>
+                            <Row className="ml-5 py-3 ">
+                                <div class="form-check form-check-inline">
+                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranTunai" checked></input>
+                                    <label className="form-check-label" for="pembayaranTunai">Bayar di tempat</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranKredit"></input>
+                                    <label className="form-check-label" for="pembayaranKredit">Kartu Kredit</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranMBanking"></input>
+                                    <label className="form-check-label" for="pembayaranMBanking">M-Banking</label>
+                                </div>
                             </Row>
-                            <Row>
-                            <div className="d-inline-block kotaktiga1 mr-auto">
-                                    <div className="d-inline-block">
-                                        <div className="namatujuan"><h5><b>Mega Darta</b></h5></div>
-                                        <div className="alamattujuan">Jl. Raya  Ds Takeranklating Kec Tikung Kabupaten Lamongan</div>
+                            <Row className="ml-5">
+                            <div className="kotaktiga1">
+                                    <div className="p-3">
+                                        <div className="d-flex align-items-center mb-2">
+                                            <img src={cash} width="50"></img>
+                                            <b className="ml-3">BAYAR DITEMPAT</b>
+                                        </div>
+                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
                                     </div>
                                 </div>
                             </Row>
@@ -141,11 +127,53 @@ const CheckoutPage = () => {
                     <div className="right-col p-4">
                         <strong>Detail Pesanan</strong>
                         <hr></hr>
+                        <div className="d-flex justify-content-between">
+                            <p>Total Belanja</p>
+                            <p>Rp.20000</p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                            <p>Diskon Belanja</p>
+                            <p>Rp.0</p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                            <p>Ongkos Kirim</p>
+                            <p>Rp.0</p>
+                        </div>
                         <hr></hr>
-                        <h6> Total Pembayaran</h6>
+                        <div className="d-flex justify-content-between">
+                            <b>Total Pembayaran</b>
+                            <p>Rp.20000</p>
+                        </div>
+                        <button className="btn btn-ijo w-100">Bayar</button>
                     </div>
                 </Col>
             </Row>
+
+            <Modal show={alamatInput} onHide={handleClose} centered>
+                <Modal.Header closeButton>
+                <Modal.Title>Tambah Alamat</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={submitAlamat} className="d-flex flex-column">
+                        <Form.Group controlId="formNamaPenerima">
+                            <Form.Label>Nama Penerima</Form.Label>
+                            <Form.Control type="text" name="name" value={alamat.name}  onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})}
+                            placeholder="Masukkan nama lengkap penerima barang" />
+                        </Form.Group>
+                        <Form.Group controlId="formNomorHP">
+                            <Form.Label>Nomor Handphone</Form.Label>
+                            <Form.Control type="text" name="number" value={alamat.number} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="081xxxxxxxxx" />
+                        </Form.Group>
+                        <Form.Group controlId="formAlamat">
+                            <Form.Label>Alamat Pengiriman</Form.Label>
+                            <Form.Control type="text" name="address" value={alamat.address} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="Masukkan Jalan, Nomor, Dusun, RT, RW" />
+                        </Form.Group>
+                        <Button className="align-self-center" type="submit" variant="ijo" onClick={handleClose}>
+                            Simpan
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </Container>
     );
 }

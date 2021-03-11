@@ -11,7 +11,7 @@ import backicon from '../asset/backicon.png';
 import '../css/ListPage.css';
 import ProductCard from './ProductCard.js';
 
-const ListPage = () => {
+const ListPage = (props) => {
     const [products, setProducts] = useState([]);
     const [title, setTitle] = useState("");
 
@@ -71,7 +71,7 @@ const ListPage = () => {
             <Row className="justify-content-center">
                 {
                     products.map((item, index) => 
-                        <ProductCard item={item} index={index} />
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
                     )
                 } 
             </Row>

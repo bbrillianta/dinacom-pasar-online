@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SERVER_HOST } from '../config.js';
+import { SERVER_HOST, rupiah } from '../config.js';
 import { Row, Col, Container, Image, Form, Button, div, InputGroup, FormControl, Card, CardDeck } from 'react-bootstrap';
 import tomat from '../asset/tomat.jpg'
 import '../css/ProdukPage.css';
@@ -13,7 +13,7 @@ import strawberry from '../asset/product-packshot-strawberrie-558x600.jpg';
 import alpukat from '../asset/Alpukat-Muda.jpg';
 import ProductCard from './ProductCard';
 
-const ProdukPage = () => {
+const ProdukPage = (props) => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [inputs, setInputs] = useState({});
@@ -51,7 +51,7 @@ const ProdukPage = () => {
                             </div>
                             <Image width="50" height="50" style={{ objectFit: "cover" }} src={ `${SERVER_HOST}/${product.seller?.picture.path}.jpg`} roundedCircle />
                         </div>
-                        <p className="mt-4"><b style={{fontSize: "30px"}}>Rp. { product.price }</b>/kg</p>
+                        <p className="mt-4"><b style={{fontSize: "30px"}}>Rp{ rupiah(product.price) }</b>/kg</p>
                         <p>Kuantitas</p>
                         <Row className="mb-4">
                             <Col md="5" className="plusminus">
@@ -107,7 +107,7 @@ const ProdukPage = () => {
             <Row className="justify-content-center">
                 {
                     recommendedProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} />
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
                     )
                 }
             </Row>

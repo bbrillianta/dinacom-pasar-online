@@ -1,5 +1,6 @@
 .checkout-page {
     background-color: #f6f6f6;
+    height: 100%;
 }
 
 .left-col {
@@ -43,18 +44,12 @@
     margin-left: 20px;
 }
 .kotakdua1{
-    margin-left: 7.7vh;
-    width: 100vh;
-    height: 20%;
-    border-bottom-style: outset;
-    border-bottom-color: #F6F6F6;
+
 }
 .kotaksatu1{
-    margin-left: 7.7vh;
     border-style: solid;
-    border-color: darkturquoise;
-    width: 300px;
-    height: 100%;
+    border-color: #0a8eff; 
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
 }
 .kotaksatu2{
     margin-left: 5vh;
@@ -71,11 +66,10 @@
     background-color: #F6F6F6;
 }
 .kotaktiga1{
-    margin-left: 80px;
     border-style: solid;
     border-color: #529f1f;
-    width: 300px;
-    height: 100%;
+    width: 350px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
 }
 
 
@@ -92,9 +86,17 @@
 .textsatu{
     
 }
-.gambarprodukco{
-    width: 20vh;
-}
+
 .gambarproduk{
     
+}
+
+.btn-alamat {
+    background-color: #cecece;
+}
+
+.kotakalamat {
+    border-style: solid;
+    border-color: #cecece; 
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
 }

@@ -13,7 +13,7 @@ import gambar3 from '../asset/Iklan3.jpg';
 import '../css/HomePage.css';
 import ProductCard from './ProductCard';
 
-const HomePage = () => {
+const HomePage = (props) => {
     const [popularProducts, setPopularProducts] = useState([]);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
@@ -37,7 +37,6 @@ const HomePage = () => {
         .then(res => res.json())
         .then(data => { 
             const sample = data.foundDocs.slice(0, 15);
-            console.log(sample);
             setAllProducts(sample); 
         });
     }, [setPopularProducts, setAllProducts, setRecommendedProducts ]);
@@ -62,7 +61,7 @@ const HomePage = () => {
             <Row className="justify-content-center">
                 {
                     popularProducts.map((item, index) =>
-                        <ProductCard item={item} index={index} />
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
                     )
                 }
             </Row>
@@ -75,7 +74,7 @@ const HomePage = () => {
             <Row className="justify-content-center">
             {
                     recommendedProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} />
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
                     )
                 }
             </Row>
@@ -90,7 +89,7 @@ const HomePage = () => {
             <Row className="mt-2 justify-content-center">
                 {
                     allProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} />
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
                     )
                 }
             </Row>

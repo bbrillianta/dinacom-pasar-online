@@ -8,11 +8,15 @@ const rootRouter = (UserModel) => {
     const userController = new UserController(UserModel);
     const homeController = new HomeController();
     
-    router.get('/', homeController.index);
+    router.get('/', userController.index);
 
     router.get('/public/:file', homeController.image);
 
     router.post('/register', userController.register);
+
+    router.post('/add-cart', userController.addCart);
+
+    router.post('/remove-cart', userController.removeItemFromCart);
 
     router.post('/login', userController.login);
 

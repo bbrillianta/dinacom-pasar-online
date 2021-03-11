@@ -22,20 +22,42 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [fetched, setFetched] = useState(false);
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    carts: [],
+    transactions: [],
+  });
+
+  useEffect(() => {
+    fetch(`${SERVER_HOST}`, {
+      credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(data => {
+      setAuth(data.auth);
+      if(data.auth) setUser(data.userSession);
+      
+      setFetched(true);
+    });
+  }, [setAuth, setUser, setFetched]);
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/login">
-            <LoginPage />
+            <LoginPage setAuth={setAuth} setUser={setUser}/>
           </Route>
           <Route path="/register">
-            <RegisterPage />
+            <RegisterPage setAuth={setAuth} setUser={setUser}/>
           </Route>
           <Route exact path="/">
-            <NavbarPage />
+            <NavbarPage auth={auth} user={user} fetched={fetched} />
             <CarouselPage />
-            <HomePage />
+            <HomePage user={user} setUser={setUser}/>
             <FooterPage />
           </Route>
           <Route path="/checkout">
@@ -48,17 +70,17 @@ function App() {
             <ShowProducts />
           </Route> */}
           <Route path="/cart">
-            <NavbarPage />
-            <KeranjangPage />
+            <NavbarPage auth={auth} user={user} fetched={fetched}/>
+            <KeranjangPage user={user} setUser={setUser} />
           </Route>
           <Route path="/product">
-            <NavbarPage />
-            <ProdukPage />
+            <NavbarPage auth={auth} user={user} fetched={fetched}/>
+            <ProdukPage user={user} setUser={setUser}/>
             <FooterPage />
           </Route>
           <Route path="/products">
-            <NavbarPage />
-            <ListPage />
+            <NavbarPage auth={auth} user={user} fetched={fetched}/>
+            <ListPage user={user} setUser={setUser}/>
             <FooterPage />
           </Route>
           {/* <Route path="/seller/create">

@@ -32,7 +32,7 @@ const FooterPage = () => {
                 </div>
             </div>
             <div className="footer2 d-flex flex-column justify-content-center">
-                <div className="f2"><b>DODOALNE PASAR OFFICIAL WEBSITE, CREATED WITH IN SURABAYA</b></div>
+                <div className="f2"><b>DODOLANE PASAR OFFICIAL WEBSITE, CREATED WITH {'<3'} IN SURABAYA</b></div>
                 <div className="f3">@COPYRIGHT DOSAR 2021, ALL RIGHTS RESERVED</div>
             </div>
         </Card.Footer>
