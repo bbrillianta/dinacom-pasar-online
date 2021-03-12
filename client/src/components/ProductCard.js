@@ -18,7 +18,37 @@ const ProductCard = (props) => {
             body: JSON.stringify(request)
         })
         .then(res => res.json())
-        .then(data => props.setUser(data.userSession));
+        .then(data => { 
+            props.setUser(data.userSession);
+            let tempBought = {};
+            for(let i = 0; i < data.userSession.carts.length; i++) {
+                const item = data.userSession.carts[i];
+                console.log(item.product);
+                tempBought = { ...tempBought, [item.product._id]: true};
+            }
+           
+            props.setBought({...tempBought});
+        });
+    }
+
+    const removeProduct = (item) => {
+        fetch(`${SERVER_HOST}/remove-product-cart`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ itemID: item._id })
+        })
+        .then(res => res.json())
+        .then(data => {
+            props.setUser(data.userSession) 
+            let tempBought = {};
+            for(let i = 0; i < data.userSession.carts.length; i++) {
+                const item = data.userSession.carts[i];
+                tempBought = { ...tempBought, [item.product._id]: true};
+            }
+            props.setBought({...tempBought});
+        });
     }
 
     return ( <Card key={ props.index } className="product">
@@ -33,7 +63,13 @@ const ProductCard = (props) => {
             <Card.Text className="mt-3">
                 <b>Rp{ rupiah(props.item.price) }</b>/kg
             </Card.Text>
-            <Button variant="ijo" style={{width: "100%"}} onClick={buyProduct}>BELI</Button>
+            {
+                props.bought[props.item._id]
+
+                ?   <Button variant="danger" style={{width: "100%"}} onClick={() => removeProduct(props.item)}>BATALKAN BELI</Button>
+
+                :   <Button variant="ijo" style={{width: "100%"}} onClick={buyProduct}>BELI</Button>
+            }
         </Card.Body>
     </Card> 
     )

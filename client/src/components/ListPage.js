@@ -71,7 +71,9 @@ const ListPage = (props) => {
             <Row className="justify-content-center">
                 {
                     products.map((item, index) => 
-                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}
+                        bought={props.bought} setBought={props.setBought}
+                        />
                     )
                 } 
             </Row>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Image, FormControl, Button, InputGroup, Modal, Form } from 'react-bootstrap';
 import '../css/CheckoutPage.css';
 import backicon from '../asset/backicon.png';
@@ -11,6 +11,7 @@ import tiga from '../asset/tiga.png';
 import tomat from '../asset/tomat.jpg';
 import lingkaran from '../asset/lingkaran.png';
 import cash from '../asset/cash.svg'
+import { rupiah, SERVER_HOST } from '../config';
 
 const CheckoutPage = (props) => {
     const [alamatInput, setAlamatInput] = useState(false);
@@ -21,11 +22,22 @@ const CheckoutPage = (props) => {
         address: ''
     });
 
+    const getTotalPrice = (props) => {
+        const { carts } = props.user;
+        let total = 0;
+        for(let i = 0; i < carts.length; i++) {
+            total += carts[i].product.price * carts[i].quantity;
+        }
+
+        return total;
+    }
+
     const handleClose = () => setAlamatInput(false);
     const handleShow = () => setAlamatInput(true);
 
     const submitAlamat = (e) => { 
         e.preventDefault();
+        setAlamatInput(false);
         setShowAlamat(true);
     }
 
@@ -55,7 +67,7 @@ const CheckoutPage = (props) => {
                                                 <div className="">
                                                     <div className="d-flex justify-content-between">
                                                         <h5><b>{alamat.name}</b></h5>
-                                                        <a href="#" onClick={handleShow}>Edit</a>
+                                                        <a href="#" onClick={handleShow} className="ml-5">Edit</a>
                                                     </div>
                                                     <div >{ alamat.address }</div>
                                                 </div>
@@ -78,16 +90,20 @@ const CheckoutPage = (props) => {
                         </div>
                         <div className="kotakdua">
                             <div>
-                                <div className="kotakdua1">
-                                    <div className="d-flex ml-5 py-3">
-                                        <img src={tomat}width="120"></img>
-                                        <div className="d-flex flex-column justify-content-center ml-4">
-                                            <div><b>Tomat Merah Besar</b></div>
-                                            <small className="my-1"><b>Jumlah: 2kg</b></small>
-                                            <h5><b>Rp. 27.200</b></h5>
-                                        </div>
-                                    </div>
-                                </div>  
+                                {
+                                    props.user.carts.map((item, index) => 
+                                        <div className="kotakdua1">
+                                            <div className="d-flex ml-5 py-3">
+                                                <img src={`${SERVER_HOST}/${item.product.img.path}.jpg`}width="120"></img>
+                                                <div className="d-flex flex-column justify-content-center ml-4">
+                                                    <div><b>{item.product.name}</b></div>
+                                                    <small className="my-1"><b>Jumlah: {item.quantity} kg</b></small>
+                                                    <h5><b>Rp{ rupiah(item.product.price * item.quantity) }</b></h5>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    )
+                                }
                             </div>
                         </div>
                         <div className="mr-auto textsatu">
@@ -129,20 +145,20 @@ const CheckoutPage = (props) => {
                         <hr></hr>
                         <div className="d-flex justify-content-between">
                             <p>Total Belanja</p>
-                            <p>Rp.20000</p>
+                            <p>Rp{rupiah(getTotalPrice(props))}</p>
                         </div>
                         <div className="d-flex justify-content-between">
                             <p>Diskon Belanja</p>
-                            <p>Rp.0</p>
+                            <p>Rp0</p>
                         </div>
                         <div className="d-flex justify-content-between">
                             <p>Ongkos Kirim</p>
-                            <p>Rp.0</p>
+                            <p>Rp0</p>
                         </div>
                         <hr></hr>
                         <div className="d-flex justify-content-between">
                             <b>Total Pembayaran</b>
-                            <p>Rp.20000</p>
+                            <p>Rp{rupiah(getTotalPrice(props))}</p>
                         </div>
                         <button className="btn btn-ijo w-100">Bayar</button>
                     </div>
@@ -158,17 +174,17 @@ const CheckoutPage = (props) => {
                         <Form.Group controlId="formNamaPenerima">
                             <Form.Label>Nama Penerima</Form.Label>
                             <Form.Control type="text" name="name" value={alamat.name}  onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})}
-                            placeholder="Masukkan nama lengkap penerima barang" />
+                            placeholder="Masukkan nama lengkap penerima barang" required/>
                         </Form.Group>
                         <Form.Group controlId="formNomorHP">
                             <Form.Label>Nomor Handphone</Form.Label>
-                            <Form.Control type="text" name="number" value={alamat.number} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="081xxxxxxxxx" />
+                            <Form.Control type="text" name="number" value={alamat.number} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="081xxxxxxxxx" required/>
                         </Form.Group>
                         <Form.Group controlId="formAlamat">
                             <Form.Label>Alamat Pengiriman</Form.Label>
-                            <Form.Control type="text" name="address" value={alamat.address} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="Masukkan Jalan, Nomor, Dusun, RT, RW" />
+                            <Form.Control type="text" name="address" value={alamat.address} onChange={(e) => setAlamat({...alamat, [e.target.name]: e.target.value})} placeholder="Masukkan Jalan, Nomor, Dusun, RT, RW" required/>
                         </Form.Group>
-                        <Button className="align-self-center" type="submit" variant="ijo" onClick={handleClose}>
+                        <Button className="align-self-center" type="submit" variant="ijo">
                             Simpan
                         </Button>
                     </Form>

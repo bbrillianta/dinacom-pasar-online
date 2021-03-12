@@ -30,6 +30,7 @@ function App() {
     carts: [],
     transactions: [],
   });
+  const [bought, setBought] = useState({});
 
   useEffect(() => {
     fetch(`${SERVER_HOST}`, {
@@ -39,10 +40,15 @@ function App() {
     .then(data => {
       setAuth(data.auth);
       if(data.auth) setUser(data.userSession);
-      
+      let tempBought = {};
+      for(let i = 0; i < data.userSession.carts.length; i++) {
+        const item = data.userSession.carts[i];
+        tempBought = { ...tempBought, [item.product._id]: true};
+      }
+      setBought({...tempBought});
       setFetched(true);
     });
-  }, [setAuth, setUser, setFetched]);
+  }, [setAuth, setUser, setFetched, setBought]);
 
   return (
     <div className="App">
@@ -57,11 +63,11 @@ function App() {
           <Route exact path="/">
             <NavbarPage auth={auth} user={user} fetched={fetched} />
             <CarouselPage />
-            <HomePage user={user} setUser={setUser}/>
+            <HomePage user={user} setUser={setUser} bought={bought} setBought={setBought}/>
             <FooterPage />
           </Route>
           <Route path="/checkout">
-            <CheckoutPage />
+            <CheckoutPage user={user} setUser={setUser}/>
           </Route>
           {/* <Route path="/product/create">
             <CreateProducts />
@@ -75,12 +81,12 @@ function App() {
           </Route>
           <Route path="/product">
             <NavbarPage auth={auth} user={user} fetched={fetched}/>
-            <ProdukPage user={user} setUser={setUser}/>
+            <ProdukPage user={user} setUser={setUser} bought={bought} setBought={setBought}/>
             <FooterPage />
           </Route>
           <Route path="/products">
             <NavbarPage auth={auth} user={user} fetched={fetched}/>
-            <ListPage user={user} setUser={setUser}/>
+            <ListPage user={user} setUser={setUser} bought={bought} setBought={setBought}/>
             <FooterPage />
           </Route>
           {/* <Route path="/seller/create">

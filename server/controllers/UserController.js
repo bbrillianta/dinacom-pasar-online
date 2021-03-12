@@ -102,7 +102,7 @@ class UserController {
 
     addCart = async (req, res) => {
         const { userID, quantity, status, productID } = req.body;
-        console.log(userID, quantity, status, productID);
+
         //Mencari user lalu push data keranjang ke field carts
         const updatedUser = await this.#UserModel.findByIdAndUpdate(userID, {
             $push: {
@@ -112,7 +112,7 @@ class UserController {
                     product: productID
                 }
             }
-        }, { new: true });
+        }, { new: true }).populate('carts.product');
         
         res.json({ success: true, userSession: updatedUser });
     }
@@ -126,7 +126,25 @@ class UserController {
         if(!item) return res.status(404).json({ success: false, message: "Barang yang dicari tidak ditemukan" });
         //menghapus item di keranjang user lalu simpan usernya
         await item.carts.id(itemID).remove();
-        const updatedUser = await item.save();
+        let updatedUser = await item.save();
+
+        updatedUser = await this.#UserModel.populate(updatedUser, { path: 'carts.product' });
+
+        res.json({ success: true, userSession: updatedUser });
+    }
+
+    removeProductFromCart = async (req, res) => {
+        const { itemID } = req.body;
+
+        const item = await this.#UserModel.findOne({ 'carts.product': itemID });
+
+        if(!item) return res.status(404).json({ success: false, message: "Barang yang dicari tidak ditemukan" });
+
+        item.carts = await item.carts.filter(data => data.product != itemID);
+
+        let updatedUser = await item.save();
+        
+        updatedUser = await this.#UserModel.populate(updatedUser, { path: 'carts.product' });
 
         res.json({ success: true, userSession: updatedUser });
     }

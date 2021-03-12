@@ -61,7 +61,10 @@ const HomePage = (props) => {
             <Row className="justify-content-center">
                 {
                     popularProducts.map((item, index) =>
-                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
+                        <ProductCard 
+                        item={item} index={index} user={props.user} setUser={props.setUser}
+                        bought={props.bought} setBought={props.setBought}
+                        />
                     )
                 }
             </Row>
@@ -74,7 +77,10 @@ const HomePage = (props) => {
             <Row className="justify-content-center">
             {
                     recommendedProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
+                        <ProductCard 
+                        item={item} index={index} user={props.user} setUser={props.setUser}
+                        bought={props.bought} setBought={props.setBought}
+                        />
                     )
                 }
             </Row>
@@ -89,7 +95,10 @@ const HomePage = (props) => {
             <Row className="mt-2 justify-content-center">
                 {
                     allProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
+                        <ProductCard 
+                        item={item} index={index} user={props.user} setUser={props.setUser}
+                        bought={props.bought} setBought={props.setBought}
+                        />
                     )
                 }
             </Row>

@@ -14,6 +14,30 @@ import { SERVER_HOST } from '../config.js';
 import { rupiah } from '../config.js';
 
 const KeranjangPage = (props) => {
+    const getTotalPrice = (props) => {
+        const { carts } = props.user;
+        let total = 0;
+        for(let i = 0; i < carts.length; i++) {
+            total += carts[i].product.price * carts[i].quantity;
+        }
+
+        return total;
+    }
+
+    const removeFromCart = (item) => {
+        fetch(`${SERVER_HOST}/remove-cart`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ itemID: item._id })
+        })
+        .then(res => res.json())
+        .then(data => {
+            props.setUser(data.userSession) 
+        });
+    }
+
     return (
         <Container>
             <div class="d-flex justify-content-between mt-4">
@@ -34,7 +58,7 @@ const KeranjangPage = (props) => {
                                     <div class="bd-highlight ml-3">
                                         <div><b>{ item.product.name }</b></div>
                                         <div className="d-flex align-items-center mt-1">
-                                            <div><b className="hargakeranjangg"> Rp{ rupiah(item.product.price) } </b>/kg</div>
+                                            <div><b className="hargakeranjangg"> Rp{ rupiah(item.product.price) }</b>/kg</div>
                                         </div>
                                         <div class="d-flex bd-highlight mt-1">
                                             <div className="bd-highlight"> <Button variant="outline-danger" className="slider d-flex justify-content-center">-</Button></div>
@@ -45,7 +69,9 @@ const KeranjangPage = (props) => {
                                         </div>
                                     </div>    
                                 </div>
-                                <div className="bd-highlight d-flex align-items-center"><img src={del} className="gambarsampah"></img></div>
+                                <div className="bd-highlight d-flex align-items-center" onClick={ () => removeFromCart(item)}>
+                                    <img src={del} className="gambarsampah"></img>
+                                </div>
                             </div>
                         )
                     }
@@ -116,8 +142,8 @@ const KeranjangPage = (props) => {
 
             <div className="d-flex justify-content-between align-items-center boxharga">
                     <div>
-                        <div><h6><b>Total Belanja 3 Item</b></h6></div>
-                        <div><h5><b>Rp. 55.200</b></h5></div>
+                        <div><h6><b>Total Belanja { props.user.carts.length }</b></h6></div>
+                        <div><h5><b>Rp{ rupiah(getTotalPrice(props)) }</b></h5></div>
                     </div>
                     <div>
                         <Button variant="success" href="/checkout"><b>CHECKOUT</b></Button>

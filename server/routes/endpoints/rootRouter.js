@@ -16,7 +16,9 @@ const rootRouter = (UserModel) => {
 
     router.post('/add-cart', userController.addCart);
 
-    router.post('/remove-cart', userController.removeItemFromCart);
+    router.delete('/remove-cart', userController.removeItemFromCart);
+
+    router.delete('/remove-product-cart', userController.removeProductFromCart);
 
     router.post('/login', userController.login);
 

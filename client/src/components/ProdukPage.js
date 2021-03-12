@@ -35,6 +35,25 @@ const ProdukPage = (props) => {
         });
     }, [setProduct, setRecommendedProducts]);
 
+    const addToCart = () => {
+        const request = { 
+            userID: props.user._id, 
+            productID: product._id,
+            quantity: quantity,
+            status: 1
+        };
+
+        fetch(`${SERVER_HOST}/add-cart`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(request)
+        })
+        .then(res => res.json())
+        .then(data => props.setUser(data.userSession));
+    }
+
     return (
         <Container>
             <Row className="justify-content-md-center produk mt-5">
@@ -83,7 +102,20 @@ const ProdukPage = (props) => {
                             </Col>
                         </Row>
                         <div className="d-flex">
-                            <Button variant="success"style={{ width: "500px" }}><img src={gambartas} className="img11"></img><text className="text11name">  Masukkan Kantong</text></Button>
+                            {
+                                props.bought[product._id]
+
+                                ?  <Button variant="danger" style={{ width: "500px" }} onClick={addToCart}>
+                                        <img src={gambartas} className="img11"></img>
+                                        <text className="text11name"> Hapus dari Kantong </text>
+                                    </Button>
+
+                                :   <Button variant="success" style={{ width: "500px" }} onClick={addToCart}>
+                                        <img src={gambartas} className="img11"></img>
+                                        <text className="text11name"> Masukkan Kantong </text>
+                                    </Button>
+                            }
+                            
                             <InputGroup className="pl-3">
                                 <FormControl
                                     placeholder="Tawar produk"
@@ -107,7 +139,9 @@ const ProdukPage = (props) => {
             <Row className="justify-content-center">
                 {
                     recommendedProducts.map((item, index) => 
-                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}/>
+                        <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}
+                        bought={props.bought} setBought={props.setBought}
+                        />
                     )
                 }
             </Row>
