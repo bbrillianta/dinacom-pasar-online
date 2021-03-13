@@ -5,28 +5,51 @@ import refresh from '../asset/refresh.png';
 import ellipsis from '../asset/ellipsis.svg';
 import { SERVER_HOST, rupiah } from '../config.js';
 const TransactionDetailsPage = () => {
-    const [transaction, setTransaction] = useState([]);
+    const [transaction, setTransaction] = useState({ bought: [] });
 
     useEffect(() => {
         const url = new URL(window.location.href);
         const query = url.searchParams.get("q");
-        console.log(query);
 
         fetch(`${SERVER_HOST}/get-transaction?q=${query}`)
         .then(res => res.json())
-        .then(data => console.log(data.transaction));
-    }, []);
+        .then(data => setTransaction(data.transaction));
+    }, [setTransaction]);
 
     return (<>
         <Container className="checkout-page pt-4" style={{ minHeight: "100vh" }} fluid>
             <Container className="px-5">
             <div class="d-flex justify-content-between ">
-                <div><a href="/" className="top"><img width="30" src={backicon}></img></a> Kembali Belanja</div>
-                <div><a href="/cart" className="top"><img className="refresh" src={refresh}></img></a></div>
+                <div><a href="/transactions" className="top"><img width="30" src={backicon}></img></a>Transaksi lain</div>
             </div>
             <div className="">
                 <div className="justify-content-center ">
-                   
+                    {
+                        transaction.bought.map((bought, index) => {
+                            return (
+                                <div key={index} 
+                                className="d-flex justify-content-between bd-highlight mt-3 p-4"
+                                style={{ backgroundColor: "white" }}
+                                > 
+                                    <div className="d-flex align-items-center ">
+                                        <div>
+                                            <img src={`${SERVER_HOST}/${bought.product.img.path}.jpg`} className="imgprodukkeranjang"></img>
+                                        </div>
+                                        <div class="bd-highlight ml-3">
+                                            <div><b>{ bought.product.name }</b></div>
+                                            <div className="d-flex align-items-center mt-1">
+                                                <small><b>Jumlah: { bought.quantity }Kg</b></small>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-center">
+                                        <div>Sub Total</div>
+                                        <h5><b>Rp{ rupiah(bought.quantity * bought.product.price - bought.discount) }</b></h5>
+                                    </div>
+                                </div>
+                            )
+                        }) 
+                    }
                 </div>
             </div>
             </Container>

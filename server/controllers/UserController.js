@@ -179,10 +179,15 @@ class UserController {
 
         const user = await this.#UserModel.findById(userID);
 
-        let bought = [{}];
-        for(let item in carts.carts) {
-            if(item.status === 1)
-                bought = [...bought, { product: item.product._id, quantity: item.quantity, discount: item.discount }]
+        let bought = [];
+        for(let item in carts) {
+            if(carts[item].status === 1) {
+                bought.push({ 
+                    product: carts[item].product._id, 
+                    quantity: carts[item].quantity, 
+                    discount: carts[item].discount 
+                });
+            }
         }
 
         await user.transactions.push({
@@ -211,10 +216,9 @@ class UserController {
         .populate('transactions.bought.product');
 
         let transaction = await user.transactions.filter(item => item._id == q);
-        
-        console.log(transaction);
+    
 
-        res.json({ success: true, transaction });
+        res.json({ success: true, transaction: transaction[0] });
     }
 }
 

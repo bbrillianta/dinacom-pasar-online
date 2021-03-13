@@ -71,7 +71,8 @@ const CheckoutPage = (props) => {
         })
         .then(res => res.json())
         .then(data => { 
-            props.setUser(data.userSession);
+            console.log(data);
+            // props.setUser(data.userSession);
             history.push('/');
             props.setShowBoughtSuccess(true);  
         })
