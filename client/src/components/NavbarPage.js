@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel, Form, Navbar, Nav, FormControl, NavDropdown, InputGroup, Button, Image } from 'react-bootstrap';
 import gambar from '../asset/DosarLogo.png';
 import gambartas from '../asset/shopping-bag-icon.png';
-import mega from '../asset/mega1.jpg';
+import mega from '../asset/user.svg';
 import '../css/Navbar.css';
 import { Redirect } from 'react-router';
 import { SERVER_HOST } from '../config.js';
@@ -57,16 +57,19 @@ const NavbarPage = (props) => {
                                         </a>
                                     </Nav.Link>
                                     <NavDropdown title=
-                                            { <Image width="35" src={mega} roundedCircle /> }
+                                            { <Image width="35" src={mega} roundedCircle style={{ border: "2px solid #529F1F"}} /> }
                                             id="basic-nav-dropdown">
                                         <NavDropdown.Item >{ props.user.username }</NavDropdown.Item>
+                                        <NavDropdown.Item href="/transactions">Riwayat Transaksi</NavDropdown.Item>
                                         <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
                                         {/* <NavDropdown.Divider />
                                         <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item> */}
                                     </NavDropdown>
                                 </Nav>
                             :   <Nav className="mx-auto">
-                                    <Nav.Link href="/login" className=""><Button variant="ijo">Login</Button></Nav.Link>
+                                    <Nav.Link href="/login" className="mr-4">
+                                        <Button variant="ijo-outline" style={{width: "90px"}}>Login</Button>
+                                    </Nav.Link>
                                     <Nav.Link href="/register"><Button variant="ijo">Register</Button></Nav.Link>
                                 </Nav>
                         : null

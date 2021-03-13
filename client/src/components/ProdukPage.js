@@ -12,14 +12,16 @@ import wortel from '../asset/wortel-import-fp.jpg'
 import strawberry from '../asset/product-packshot-strawberrie-558x600.jpg';
 import alpukat from '../asset/Alpukat-Muda.jpg';
 import ProductCard from './ProductCard';
+import { useHistory } from 'react-router';
 
 const ProdukPage = (props) => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [inputs, setInputs] = useState({});
+    const [bidInput, setBidInput] = useState(0);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
+    const history = useHistory();
 
-    useEffect(async () => {
+    useEffect(() => {
         const url = new URL(window.location.href);
         const pQuery = url.searchParams.get("p");
 
@@ -36,11 +38,14 @@ const ProdukPage = (props) => {
     }, [setProduct, setRecommendedProducts]);
 
     const addToCart = () => {
+        if(props.user.username === '') return history.push('/login');
+
         const request = { 
             userID: props.user._id, 
             productID: product._id,
             quantity: quantity,
-            status: 1
+            status: 1,
+            discount: 0
         };
 
         fetch(`${SERVER_HOST}/add-cart`, {
@@ -51,7 +56,85 @@ const ProdukPage = (props) => {
             body: JSON.stringify(request)
         })
         .then(res => res.json())
-        .then(data => props.setUser(data.userSession));
+        .then(data => { 
+            props.setUser(data.userSession) 
+            let tempBought = {};
+            for(let i = 0; i < data.userSession.carts.length; i++) {
+                const item = data.userSession.carts[i];
+                console.log(item.product);
+                tempBought = { ...tempBought, [item.product._id]: true};
+            }
+           
+            props.setBought({...tempBought});
+
+            props.setShowRemoveFromCart(false);
+            props.setShowAddToCart(true);
+        });
+    }
+
+    const bid = (e) => {
+        if(props.user.username === '') return history.push('/login');
+
+        e.preventDefault();
+        if(bidInput < product.minPrice * quantity) { 
+            console.log(false) 
+        } else {
+            const request = { 
+                userID: props.user._id, 
+                productID: product._id,
+                quantity: quantity,
+                status: 2,
+                discount: product.price - bidInput
+            };
+
+            fetch(`${SERVER_HOST}/add-cart`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            .then(res => res.json())
+            .then(data => { 
+                props.setUser(data.userSession) 
+                let tempBought = {};
+                for(let i = 0; i < data.userSession.carts.length; i++) {
+                    const item = data.userSession.carts[i];
+                    console.log(item.product);
+                    tempBought = { ...tempBought, [item.product._id]: true};
+                }
+            
+                props.setBought({...tempBought});
+
+                props.setShowRemoveFromCart(false);
+                props.setShowAddToCart(true);
+            });
+        }
+    }
+
+    const removeProduct = (item) => {
+        if(props.user.username === '') return history.push('/login');
+
+        fetch(`${SERVER_HOST}/remove-product-cart`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ itemID: item._id })
+        })
+        .then(res => res.json())
+        .then(data => {
+            props.setUser(data.userSession) 
+            let tempBought = {};
+            for(let i = 0; i < data.userSession.carts.length; i++) {
+                const item = data.userSession.carts[i];
+                tempBought = { ...tempBought, [item.product._id]: true};
+            }
+            props.setBought({...tempBought});
+
+            props.setShowAddToCart(false);
+            props.setShowRemoveFromCart(true);
+        });
     }
 
     return (
@@ -71,8 +154,9 @@ const ProdukPage = (props) => {
                             <Image width="50" height="50" style={{ objectFit: "cover" }} src={ `${SERVER_HOST}/${product.seller?.picture.path}.jpg`} roundedCircle />
                         </div>
                         <p className="mt-4"><b style={{fontSize: "30px"}}>Rp{ rupiah(product.price) }</b>/kg</p>
-                        <p>Kuantitas</p>
-                        <Row className="mb-4">
+
+                        <p className="m-0 mb-1">Kuantitas</p>
+                        <Row className="mb-4 align-items-center">
                             <Col md="5" className="plusminus">
                                 <InputGroup>
                                     <Button variant="outline-danger" 
@@ -83,7 +167,7 @@ const ProdukPage = (props) => {
                                         }>
                                         -
                                     </Button>
-                                    <FormControl type="text" className="text-center mx-3"
+                                    <FormControl type="text" className="text-center mx-2"
                                         value={ quantity }
                                         name="quantity"
                                         onChange={ (e) => { 
@@ -98,35 +182,43 @@ const ProdukPage = (props) => {
                             </Col>
                             <Col md="7" className="text10 pl-5">
                                 <small>Sub Total</small>
-                                <h5 className="m-0"><b>{ product.price * quantity }</b></h5>
+                                <h5 className="m-0"><b>Rp{ rupiah(product.price * quantity) }</b></h5>
                             </Col>
                         </Row>
-                        <div className="d-flex">
+                        <div className="d-flex flex-column">
                             {
                                 props.bought[product._id]
 
-                                ?  <Button variant="danger" style={{ width: "500px" }} onClick={addToCart}>
-                                        <img src={gambartas} className="img11"></img>
-                                        <text className="text11name"> Hapus dari Kantong </text>
-                                    </Button>
+                                ?   <div className="d-flex"> 
+                                        <Button variant="danger" style={{ width: "500px" }} onClick={() => removeProduct(product) }>
+                                            <img src={gambartas} className="img11"></img>
+                                            <text className="text11name"> Keluarkan Kantong </text>
+                                        </Button>
+                                    </div>
 
-                                :   <Button variant="success" style={{ width: "500px" }} onClick={addToCart}>
-                                        <img src={gambartas} className="img11"></img>
-                                        <text className="text11name"> Masukkan Kantong </text>
-                                    </Button>
+                                :   <div className="d-flex">
+                                        <Button variant="success" style={{ width: "280px" }} onClick={addToCart} >
+                                            <img src={gambartas} className="img11"></img>
+                                            <text className="text11name"> Masukkan Kantong </text>
+                                        </Button>
+                                
+                                        <Form method="POST" onSubmit={bid}>
+                                            <InputGroup className="pl-3">
+                                                    <FormControl
+                                                        placeholder="Tawar produk"
+                                                        aria-label="Recipient's username"
+                                                        aria-describedby="basic-addon2"
+                                                        onChange={(e) => setBidInput(e.target.value) }
+                                                    />
+                                                <InputGroup.Append>
+                                                    <Button variant="ijo-outline" type="submit" >Tawar</Button>
+                                                </InputGroup.Append>
+                                            </InputGroup>
+                                        </Form>
+                                    </div>
                             }
                             
-                            <InputGroup className="pl-3">
-                                <FormControl
-                                    placeholder="Tawar produk"
-                                    aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2"
-                                    min={ quantity * product.minPrice }
-                                />
-                                <InputGroup.Append>
-                                    <Button variant="outline-danger">Tawar</Button>
-                                </InputGroup.Append>
-                            </InputGroup>
+                            { !props.bought[product._id] && <small className="align-self-end text-muted">*Maksimal tawaran Rp{rupiah(product.minPrice * quantity)}</small> }
                         </div>
                     </div>
                 </Col>
@@ -141,6 +233,7 @@ const ProdukPage = (props) => {
                     recommendedProducts.map((item, index) => 
                         <ProductCard item={item} index={index} user={props.user} setUser={props.setUser}
                         bought={props.bought} setBought={props.setBought}
+                        setShowAddToCart={props.setShowAddToCart} setShowRemoveFromCart={props.setShowRemoveFromCart}
                         />
                     )
                 }

@@ -101,7 +101,7 @@ class UserController {
     }
 
     addCart = async (req, res) => {
-        const { userID, quantity, status, productID } = req.body;
+        const { userID, quantity, status, productID, discount } = req.body;
 
         //Mencari user lalu push data keranjang ke field carts
         const updatedUser = await this.#UserModel.findByIdAndUpdate(userID, {
@@ -109,11 +109,14 @@ class UserController {
                 carts: {
                     quantity,
                     status,
+                    discount,
                     product: productID
                 }
             }
-        }, { new: true }).populate('carts.product');
-        
+        }, 
+        { new: true })
+        .populate('carts.product');
+    
         res.json({ success: true, userSession: updatedUser });
     }
 
@@ -147,6 +150,71 @@ class UserController {
         updatedUser = await this.#UserModel.populate(updatedUser, { path: 'carts.product' });
 
         res.json({ success: true, userSession: updatedUser });
+    }
+
+    modifyProductQuantity = async (req, res) => {
+        const { productID } = req.body;
+        const { q } = req.query || '';
+
+        let updatedDoc;
+        if(q === 'inc') {
+            updatedDoc = await this.#UserModel.findOneAndUpdate({ 'carts.product': productID }, 
+            { $inc: { 'carts.$.quantity': 1 } },
+            { new: true })
+            .populate('carts.product');
+        }
+
+        if(q === 'dec') {
+            updatedDoc = await this.#UserModel.findOneAndUpdate({ 'carts.product': productID }, 
+            { $inc: { 'carts.$.quantity': -1 } },
+            { new: true })
+            .populate('carts.product');
+        }
+
+        res.json({ success: true, userSession: updatedDoc });
+    }
+
+    addTransaction = async (req, res) => {
+        const { userID, carts, address, phone, name, totalPrice, paidVia, boughtDate } = req.body;
+
+        const user = await this.#UserModel.findById(userID);
+
+        let bought = [{}];
+        for(let item in carts.carts) {
+            if(item.status === 1)
+                bought = [...bought, { product: item.product._id, quantity: item.quantity, discount: item.discount }]
+        }
+
+        await user.transactions.push({
+            bought,
+            address,
+            name,
+            phone,
+            totalPrice,
+            paidVia,
+            boughtDate
+        });
+
+        const updatedCarts = await user.carts.filter(item => item.status != 1)
+
+        user.carts = updatedCarts;
+
+        const userSession = await user.save();
+
+        res.json({ success: true, userSession });
+    }
+
+    getTransaction = async (req, res) => {
+        const { q } = req.query || '';
+
+        const user = await this.#UserModel.findOne({'transactions._id': q})
+        .populate('transactions.bought.product');
+
+        let transaction = await user.transactions.filter(item => item._id == q);
+        
+        console.log(transaction);
+
+        res.json({ success: true, transaction });
     }
 }
 

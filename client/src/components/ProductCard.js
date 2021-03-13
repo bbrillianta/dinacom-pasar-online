@@ -1,13 +1,19 @@
 import { Container, Row, Col, CardDeck, Card, Button, CardColumns} from 'react-bootstrap';
+import { useHistory } from 'react-router';
 import { SERVER_HOST, rupiah } from '../config.js';
 
 const ProductCard = (props) => {
+    const history = useHistory();
+    
     const buyProduct = () => {
+        if(props.user.username === '') return history.push('/login');
+
         const request = { 
             userID: props.user._id, 
             productID: props.item._id,
             quantity: 1,
-            status: 1
+            status: 1,
+            discount: 0
         };
 
         fetch(`${SERVER_HOST}/add-cart`, {
@@ -28,10 +34,15 @@ const ProductCard = (props) => {
             }
            
             props.setBought({...tempBought});
+
+            props.setShowRemoveFromCart(false);
+            props.setShowAddToCart(true);
         });
     }
 
     const removeProduct = (item) => {
+        if(props.user.username === '') return history.push('/login');
+
         fetch(`${SERVER_HOST}/remove-product-cart`, {
             method: "DELETE",
             headers: {
@@ -48,6 +59,9 @@ const ProductCard = (props) => {
                 tempBought = { ...tempBought, [item.product._id]: true};
             }
             props.setBought({...tempBought});
+
+            props.setShowAddToCart(false);
+            props.setShowRemoveFromCart(true);
         });
     }
 
@@ -57,7 +71,7 @@ const ProductCard = (props) => {
         </a>
         <Card.Body>
             <Card.Title className="text-truncate m-0">
-                <a href={ `/product?p=${ props.item._id }` }>{ props.item.name }</a>
+                <a href={ `/product?p=${ props.item._id }` } style={{ fontWeight: "bold" }}>{ props.item.name }</a>
             </Card.Title>
             <small>{ props.item.seller.name }</small>
             <Card.Text className="mt-3">
@@ -66,10 +80,15 @@ const ProductCard = (props) => {
             {
                 props.bought[props.item._id]
 
-                ?   <Button variant="danger" style={{width: "100%"}} onClick={() => removeProduct(props.item)}>BATALKAN BELI</Button>
+                ?   <Button variant="danger" style={{width: "100%"}} onClick={() => removeProduct(props.item)}>- Kantong</Button>
 
-                :   <Button variant="ijo" style={{width: "100%"}} onClick={buyProduct}>BELI</Button>
+                :   <Button variant="ijo" style={{width: "100%"}} onClick={buyProduct}>+ Kantong</Button>
             }
+            <a href={ `/product?p=${ props.item._id }` }>
+                <Button variant="ijo-outline" className="mt-2 d-flex align-items-center justify-content-center" style={{width: "100%", height: "30px"}}>
+                    Tawar
+                </Button>
+            </a>
         </Card.Body>
     </Card> 
     )

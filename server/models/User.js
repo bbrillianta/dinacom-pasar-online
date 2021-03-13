@@ -11,15 +11,21 @@ class User extends MongoDriver {
             carts: [{ 
                 product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
                 status: Number,
-                quantity: Number
+                quantity: Number,
+                discount: Number
             }],
             transactions: [{
                 bought: [{ 
                     product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-                    quantity: Number
+                    quantity: Number,
+                    discount: Number
                 }],
+                address: String,
+                name: String,
+                phone: String,
                 totalPrice: Number,
-                paidVia: String
+                paidVia: String,
+                boughtDate: String
             }]
         });
 

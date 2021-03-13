@@ -12,6 +12,7 @@ import tomat from '../asset/tomat.jpg';
 import lingkaran from '../asset/lingkaran.png';
 import cash from '../asset/cash.svg'
 import { rupiah, SERVER_HOST } from '../config';
+import { useHistory } from 'react-router';
 
 const CheckoutPage = (props) => {
     const [alamatInput, setAlamatInput] = useState(false);
@@ -19,14 +20,18 @@ const CheckoutPage = (props) => {
     const [alamat, setAlamat] = useState({
         name: '',
         number: '',
-        address: ''
+        address: '',
     });
+    const [pembayaran, setPembayaran] = useState("Tunai");
+    const history = useHistory();
 
     const getTotalPrice = (props) => {
         const { carts } = props.user;
+        let valid = carts.filter(item => item.status === 1);
+
         let total = 0;
-        for(let i = 0; i < carts.length; i++) {
-            total += carts[i].product.price * carts[i].quantity;
+        for(let i = 0; i < valid.length; i++) {
+            total += valid[i].product.price * valid[i].quantity;
         }
 
         return total;
@@ -41,8 +46,39 @@ const CheckoutPage = (props) => {
         setShowAlamat(true);
     }
 
+    const buy = () => {
+        if(alamat.name === '') return; 
+
+        const date = new Date();
+
+        const request = {
+            userID: props.user._id,
+            name: alamat.name,
+            address: alamat.address,
+            phone: alamat.number,
+            carts: props.user.carts,
+            totalPrice: getTotalPrice(props),
+            paidVia: pembayaran,
+            boughtDate: date.toLocaleDateString('ID')
+        }
+        
+        fetch(`${SERVER_HOST}/add-transaction`, { 
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(request)
+        })
+        .then(res => res.json())
+        .then(data => { 
+            props.setUser(data.userSession);
+            history.push('/');
+            props.setShowBoughtSuccess(true);  
+        })
+    }
+
     return (
-        <Container className="checkout-page py-2 px-5" fluid>
+        <Container className="checkout-page py-2 px-5" style={{ minHeight: "100vh" }} fluid>
             <Row>
                 <Col>
                     <div className="d-flex align-items-center"> 
@@ -92,9 +128,9 @@ const CheckoutPage = (props) => {
                             <div>
                                 {
                                     props.user.carts.map((item, index) => 
-                                        <div className="kotakdua1">
+                                        <div className="kotakdua1" className={item.status !==1 && 'd-none'}>
                                             <div className="d-flex ml-5 py-3">
-                                                <img src={`${SERVER_HOST}/${item.product.img.path}.jpg`}width="120"></img>
+                                                <img src={`${SERVER_HOST}/${item.product.img.path}.jpg`} width="120" height="83" style={{ objectFit: "cover" }}></img>
                                                 <div className="d-flex flex-column justify-content-center ml-4">
                                                     <div><b>{item.product.name}</b></div>
                                                     <small className="my-1"><b>Jumlah: {item.quantity} kg</b></small>
@@ -111,22 +147,45 @@ const CheckoutPage = (props) => {
                             <h6 className="d-inline-block align-center ml-4">Metode Pembayaran</h6>
                         </div>
                         <div className="kotaktiga">
-                            <Row className="ml-5 py-3 ">
-                                <div class="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranTunai" checked></input>
-                                    <label className="form-check-label" for="pembayaranTunai">Bayar di tempat</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranKredit"></input>
-                                    <label className="form-check-label" for="pembayaranKredit">Kartu Kredit</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="pembayaran" id="pembayaranMBanking"></input>
-                                    <label className="form-check-label" for="pembayaranMBanking">M-Banking</label>
-                                </div>
+                            <Row className="ml-5 ">
+                                {['radio'].map((type) => (
+                                    <div key={`custom-inline-${type}`} className="mb-3">
+                                    <Form.Check
+                                        custom
+                                        inline
+                                        label="Bayar Ditempat"
+                                        type={type}
+                                        name="pembayaran"
+                                        id={`custom-inline-${type}-1`}
+                                        checked={ pembayaran === "Tunai" ? true : false }
+                                        onChange={() => setPembayaran("Tunai")}
+                                    />
+                                    <Form.Check
+                                        custom
+                                        inline
+                                        label="Kartu Kredit"
+                                        type={type}
+                                        name="pembayaran"
+                                        id={`custom-inline-${type}-2`}
+                                        onChange={() => setPembayaran("Kredit")}
+                                    />
+                                    <Form.Check
+                                        custom
+                                        inline
+                                        name="pembayaran"
+                                        label="M-Banking"
+                                        type={type}
+                                        id={`custom-inline-${type}-3`}
+                                        onChange={() => setPembayaran("M-Banking")}
+                                    />
+                                    </div>
+                                ))}
                             </Row>
+                            
+                            {/* Bayar ditempat */
+                            pembayaran === "Tunai" &&
                             <Row className="ml-5">
-                            <div className="kotaktiga1">
+                                <div className="kotaktiga1">
                                     <div className="p-3">
                                         <div className="d-flex align-items-center mb-2">
                                             <img src={cash} width="50"></img>
@@ -136,6 +195,37 @@ const CheckoutPage = (props) => {
                                     </div>
                                 </div>
                             </Row>
+                            }
+
+                            {/* Kartu Kredit */
+                            pembayaran === "Kredit" && 
+                            <Row className="ml-5">
+                                <div className="kotaktiga1">
+                                    <div className="p-3">
+                                        <div className="d-flex align-items-center mb-2">
+                                            <img src={cash} width="50"></img>
+                                            <b className="ml-3">KARTU KREDIT</b>
+                                        </div>
+                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
+                                    </div>
+                                </div>
+                            </Row>
+                            }
+
+                            {/* M-Banking */
+                            pembayaran === "M-Banking" &&
+                            <Row className="ml-5">
+                                <div className="kotaktiga1">
+                                    <div className="p-3">
+                                        <div className="d-flex align-items-center mb-2">
+                                            <img src={cash} width="50"></img>
+                                            <b className="ml-3">M-Banking</b>
+                                        </div>
+                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
+                                    </div>
+                                </div>
+                            </Row>
+                            }
                         </div>
                     </div>
                 </Col>
@@ -160,7 +250,10 @@ const CheckoutPage = (props) => {
                             <b>Total Pembayaran</b>
                             <p>Rp{rupiah(getTotalPrice(props))}</p>
                         </div>
-                        <button className="btn btn-ijo w-100">Bayar</button>
+                        <button className="btn btn-ijo w-100" 
+                        onClick={buy}>
+                            Bayar
+                        </button>
                     </div>
                 </Col>
             </Row>

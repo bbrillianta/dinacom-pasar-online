@@ -64,6 +64,7 @@ const HomePage = (props) => {
                         <ProductCard 
                         item={item} index={index} user={props.user} setUser={props.setUser}
                         bought={props.bought} setBought={props.setBought}
+                        setShowAddToCart={props.setShowAddToCart} setShowRemoveFromCart={props.setShowRemoveFromCart}
                         />
                     )
                 }
@@ -79,7 +80,8 @@ const HomePage = (props) => {
                     recommendedProducts.map((item, index) => 
                         <ProductCard 
                         item={item} index={index} user={props.user} setUser={props.setUser}
-                        bought={props.bought} setBought={props.setBought}
+                        bought={props.bought} setBought={props.setBought} 
+                        setShowAddToCart={props.setShowAddToCart} setShowRemoveFromCart={props.setShowRemoveFromCart}
                         />
                     )
                 }
@@ -98,6 +100,7 @@ const HomePage = (props) => {
                         <ProductCard 
                         item={item} index={index} user={props.user} setUser={props.setUser}
                         bought={props.bought} setBought={props.setBought}
+                        setShowAddToCart={props.setShowAddToCart} setShowRemoveFromCart={props.setShowRemoveFromCart}
                         />
                     )
                 }

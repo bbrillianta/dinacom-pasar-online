@@ -16,9 +16,15 @@ const rootRouter = (UserModel) => {
 
     router.post('/add-cart', userController.addCart);
 
+    router.post('/add-transaction', userController.addTransaction);
+
+    router.get('/get-transaction', userController.getTransaction);
+
     router.delete('/remove-cart', userController.removeItemFromCart);
 
     router.delete('/remove-product-cart', userController.removeProductFromCart);
+
+    router.post('/modify-cart', userController.modifyProductQuantity);
 
     router.post('/login', userController.login);
 
