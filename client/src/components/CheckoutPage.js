@@ -24,6 +24,7 @@ const CheckoutPage = (props) => {
     });
     const [pembayaran, setPembayaran] = useState("Tunai");
     const history = useHistory();
+    const [errorMsg, setErrorMsg] = useState(false);
 
     const getTotalPrice = (props) => {
         const { carts } = props.user;
@@ -47,7 +48,7 @@ const CheckoutPage = (props) => {
     }
 
     const buy = () => {
-        if(alamat.name === '') return; 
+        if(alamat.name === '') setErrorMsg(true); 
 
         const date = new Date();
 
@@ -262,6 +263,7 @@ const CheckoutPage = (props) => {
                             <b>Total Pembayaran</b>
                             <p>Rp{rupiah(getTotalPrice(props))}</p>
                         </div>
+                        {errorMsg && <div style={{}}></div> }
                         <button className="btn btn-ijo w-100" 
                         onClick={buy}>
                             Bayar

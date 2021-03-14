@@ -71,7 +71,7 @@ const ProductCard = (props) => {
         </a>
         <Card.Body>
             <Card.Title className="text-truncate m-0">
-                <a href={ `/product?p=${ props.item._id }` } style={{ fontWeight: "bold" }}>{ props.item.name }</a>
+                <a href={ `/product?p=${ props.item._id }` } style={{ fontWeight: "600", fontSize: "16px" }}>{ props.item.name }</a>
             </Card.Title>
             <small>{ props.item.seller.name }</small>
             <Card.Text className="mt-3">
@@ -80,12 +80,12 @@ const ProductCard = (props) => {
             {
                 props.bought[props.item._id]
 
-                ?   <Button variant="danger" style={{width: "100%"}} onClick={() => removeProduct(props.item)}>- Kantong</Button>
+                ?   <Button variant="danger" className="btn-kantong" style={{width: "100%"}} onClick={() => removeProduct(props.item)}>- Kantong</Button>
 
-                :   <Button variant="ijo" style={{width: "100%"}} onClick={buyProduct}>+ Kantong</Button>
+                :   <Button variant="ijo" className="btn-kantong" style={{width: "100%"}} onClick={buyProduct}>+ Kantong</Button>
             }
             <a href={ `/product?p=${ props.item._id }` }>
-                <Button variant="ijo-outline" className="mt-2 d-flex align-items-center justify-content-center" style={{width: "100%", height: "30px"}}>
+                <Button variant="ijo-outline" className="mt-2 d-flex align-items-center justify-content-center btn-tawar" style={{width: "100%", height: "30px"}}>
                     Tawar
                 </Button>
             </a>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
 body, html, .App, #root {
   margin: 0;
   padding: 0;
@@ -199,8 +201,31 @@ a, a:hover {
 }
 
 @media (max-width: 764px){
+  /* .product {
+    width: 10rem;
+    margin: 10px 10px 10px 0;
+  } */
+}
 
+@media (max-width: 576px){
+  .product .card-img-top {
+    height: 120px;
+    object-fit: cover;
+  }
 
+  .product {
+    width: 8rem;
+    margin: 10px 10px 10px 0;
+  }
+
+  .btn-tawar, .btn-kantong {
+    font-size: 8px;
+  } 
+
+  .btn-tawar {
+    padding: 0!important;
+    height: auto!important;
+  }
 }
 
 .check_mark {
