@@ -18,8 +18,17 @@ const ListPage = (props) => {
     useEffect(() => {
         const url = new URL(window.location.href);
         const query = url.searchParams.get("q");
+        let sQuery = url.searchParams.get("s");
 
-        if(query === "popular") {
+        if(sQuery) {
+            fetch(`${ SERVER_HOST }/product/search?s=${sQuery}`)
+            .then(res => res.json())
+            .then(data => { 
+                const sample = data.foundDocs;
+                console.log(sample);
+                setProducts(sample); 
+            });
+        }else if(query === "popular") {
             fetch(`${ SERVER_HOST }/product/popular`)
             .then(res => res.json())
             .then(data => { 

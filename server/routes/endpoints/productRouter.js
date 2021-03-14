@@ -14,6 +14,8 @@ const productRouter = (ProductModel, SellerModel) => {
 
     router.get('/popular', productController.getPopular);
 
+    router.get('/search', productController.getProductByName);
+
     router.get('/recommended', productController.getRecommended);
 
     router.post('/create', productController.uploadImg(), productController.create);

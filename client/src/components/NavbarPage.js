@@ -23,9 +23,8 @@ const NavbarPage = (props) => {
         return carts.length;
     }
 
-    const searching = (e) => {
-        e.preventDefault();
-        console.log(encodeURI(search));
+    const searching = () => {
+        return encodeURI(search);
     }
 
     return (
@@ -40,9 +39,9 @@ const NavbarPage = (props) => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Form inline className=" mx-auto" onSubmit={searching}>
+                <Form inline className=" mx-auto">
                     <FormControl type="text" placeholder="Search" className="searchtxt searchbar" onChange={(e) => setSearch(e.target.value)}/>
-                    <Button type="submit" className="searchbtn searchbar">Search</Button>
+                    <a href={`/products?s=` + searching()}><Button className="searchbtn searchbar">Search</Button></a>
                 </Form>
                 
                     {   

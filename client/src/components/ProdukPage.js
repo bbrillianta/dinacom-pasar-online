@@ -24,6 +24,7 @@ const ProdukPage = (props) => {
     useEffect(() => {
         const url = new URL(window.location.href);
         const pQuery = url.searchParams.get("p");
+        
 
         fetch(`${SERVER_HOST}/product/query?p=${pQuery}`)
         .then(res => res.json())

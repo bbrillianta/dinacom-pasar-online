@@ -58,6 +58,19 @@ class ProductController {
 
         res.json({ success: true, foundDocs });
     }
+
+    getProductByName = async (req, res) => {
+        let { s } = req.query || 0;
+
+        s = decodeURI(s);
+
+        console.log(s);
+
+        //Mencari produk yang ID nya query url p
+        const foundDocs = await this.#ProductModel.find({'name': s}).populate('seller');
+
+        res.json({ success: true, foundDocs });
+    }
     
     create = async (req, res) => {
         const { name, price, seller, minPrice, stock, category} = req.body;
