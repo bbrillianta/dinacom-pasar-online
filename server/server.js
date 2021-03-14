@@ -6,7 +6,11 @@ const { PORT } = require('./config/basic');
 
 const app = express();
 
-app.use(cors());
+const corsOption = {
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+app.use(cors(corsOption));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

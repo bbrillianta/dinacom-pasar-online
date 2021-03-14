@@ -7,7 +7,26 @@ class User extends MongoDriver {
         super({
             username: String,
             email: String,
-            password: String
+            password: String,
+            carts: [{ 
+                product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+                status: Number,
+                quantity: Number,
+                discount: Number
+            }],
+            transactions: [{
+                bought: [{ 
+                    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+                    quantity: Number,
+                    discount: Number
+                }],
+                address: String,
+                name: String,
+                phone: String,
+                totalPrice: Number,
+                paidVia: String,
+                boughtDate: String
+            }]
         });
 
         //Membuat model User

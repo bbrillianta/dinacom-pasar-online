@@ -1,0 +1,74 @@
+/*homepage*/
+.batas{
+    width: 10vh;
+}
+.homekategori{
+    width: 350px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.homekategori:hover{
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
+.namakategori{
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+}
+
+/* .produk-list .card {
+    margin: 0 10px!important;
+} */
+
+/* .list-produk1, .list-produk2, .list-produk3{
+    margin-bottom: 10vh;
+    margin-top: 2vh;
+} */
+.namelist{
+    margin-top: 5vh;
+}
+.iklan2{
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+.kategoribelanja{
+    justify-content: center!important;
+}
+.namakategori{
+    text-align: center!important;
+}
+.card-text{
+    font-size: 10px!important;
+}
+.h5{
+    font-size: 1rem;
+}
+
+.homekategori {
+    width: 300px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+}
+
+@media (min-width: 768px) {
+.card-deck{
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.card-deck .card {
+    flex: 1 0;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+}
+
+
+}

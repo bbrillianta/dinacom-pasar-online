@@ -1,0 +1,94 @@
+.KeranjangPage{
+    background-color: #f6f6f6;
+}
+.refresh{
+    width: 20px;   
+}
+.top:link{
+    text-decoration: none;
+}
+.boxkeranjang{
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background-color: white;
+}
+.boxharga{
+    background-color: white;
+    padding: 20px;
+}
+.keranjangatas{
+    background-color: #529F1F;
+    color: white;
+}
+.keranjangbawah{
+    padding: 45px;    
+    padding-top: 10px;
+    border: 1px solid black;
+    box-shadow: -1px 3px 1px rgba(0,0,0,0.1);
+}
+.imgprodukkeranjang{
+    width: 150px;
+    height: 112px;
+    object-fit: cover;
+}
+.hargakeranjang{
+    color: red;
+}
+.hargakeranjangg{
+    color: black;
+}
+.kotaksatuu{
+    border-radius: 1;
+    border-style: solid;
+    border-color: red;
+}
+
+.kotakduaa{
+    border-radius: 1;
+    border-style: solid;
+    border-color: #529F1F;
+}
+.tawar{
+    border-radius: 1;
+    border-style: solid;
+    padding: 5px;
+    
+}
+.gambarsampah{
+    width: 30px;
+}
+.diskonkeranjang{
+    color: red;
+    
+    text-decoration: line-through;
+}
+.jumlahdiskokeranjang{
+    color: #529F1F;
+    font-size: 15px;
+}
+.placetext{
+    width: 100px;
+}
+
+@media (max-width: 765px) {
+    .hargakeranjang, .hargakeranjangg, .tawar, .diskonkeranjang {
+        font-size: 12px;
+    }
+
+    .jumlahdiskokeranjang {
+        display: none;
+    }
+    
+    .imgprodukkeranjang {
+        width: 150px;
+    }
+
+    .slider {
+        width: 30px;
+    }
+
+    .slider-text {
+        width: 60px;
+        margin: 0 5px;
+    }
+}

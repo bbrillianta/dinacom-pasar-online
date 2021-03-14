@@ -1,0 +1,98 @@
+/* .produk{
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+} */
+/* .text1{
+    margin-left: 10%;
+}
+.text2{
+    margin-left: 10%;
+    margin-top: -1vh;
+}
+.text3{
+    margin-left: 10%;
+    color: red;
+}
+.text4{
+    color: green;
+}
+.text5{
+    margin-top: 10%;
+    font-size: 15px;
+}
+.text6{
+    margin-left: 10%;
+    font-size: 25px;
+}
+.text7{
+    font-size: 12px;
+    color: black;
+}
+.text8{
+    margin-left: 10%;
+    margin-top: 4vh;
+}
+.text9{
+    font-size: 10px;
+}
+.text10{
+    margin-left: -10vh;
+    margin-top: 1vh;
+}
+.text11{
+    margin-left: 10%;
+}
+.text11name{
+    font-size: 15px;
+}
+.text13{
+    margin-top: 10vh;
+} */
+/* .kantong{
+    align-content: ce;
+} */
+.img11{
+    width: 3vh;
+}
+
+/* .userimage{
+    margin-left: 60%;
+} */
+
+.bawah{
+    border-top: 25px solid #529F1F;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    /* border: 1px dashed grey; */
+}
+.produkterkait{
+    text-align: center!important;
+    font-size: 30px;
+}
+
+.fotoproduk {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.masuk-kantong {
+    width: 280px;
+}
+
+@media (max-width: 1200px) {
+    .masuk-kantong {
+        width: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .masuk-kantong {
+        width: 280px;
+    }
+}
+
+@media (max-width: 767px) {
+    .masuk-kantong {
+        width: auto;
+    }
+}

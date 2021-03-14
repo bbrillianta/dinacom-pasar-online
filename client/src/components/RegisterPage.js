@@ -1,80 +1,72 @@
 import React, { useState } from 'react';
 import { Row, Col, Container, Image, Form, Button, div} from 'react-bootstrap';
-import gambar from '../asset/quote1.jpg';
-import '../cek.css';
+import { useHistory } from 'react-router';
+import gambar from '../asset/DosarLogo.png';
+import sideimage from '../asset/quote1.jpg'
+import '../css/LoginPage.css';
 
-const RegisterPage = () => {
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [confirm, setConfirm] = useState();
-    const [pesan, setPesan] = useState();
+
+const RegisterPage = (props) => {
+    const history = useHistory();
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [confirm, setConfirm] = useState(null);
+    const [pesan, setPesan] = useState(null);
 
     function submitregister(e){
         e.preventDefault();
         fetch('http://localhost:3001/register', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({username, email, password, confirm})
-        }).then(response => response.json()).then(data => { if(data.success==false) setPesan(data.message)})        
+        })
+        .then(response => response.json())
+        .then(data => { 
+            if(!data.success) return setPesan(data.message);
+
+            props.setAuth(data.success);
+            props.setUser(data.userSession);
+            return history.push('/');
+        })        
         }
 
     return (
-        <Container>
+        <Container fluid>
         <Row>
-            <Col>
-            <div className="kiri">
-            <div className="kirilogin">
-                <div className="logologin">
-                    <Image src="https://s1.bukalapak.com/img/13964212711/large/Jual_Vinyl_Lantai_Motif_Polos_Vinyl_Meteran_Warna_Hitam.jpg" roundedCircle width="80" height="80px" />
+            <Col  className="d-flex flex-column align-items-center justify-content-around">
+            <a href="/"><Image src={ gambar } width="234" height="72" className="mt-5" /></a>
+                <div className="d-flex flex-column align-items-center mt-3" style={{ color: "red" }}>
+                    { pesan }
                 </div>
-                <div className="namelogin"><h5><b>NAMA BRAND</b></h5></div>
-                <div className="halologin">
-                    Create an account
-                </div>
-                <div className="formregister">
-                    <Form onSubmit={submitregister} method="post">
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>USERNAME</Form.Label>
-                            <Form.Control onChange={e => setUsername(e.target.value)} type="text" placeholder="Enter username" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>EMAIL</Form.Label>
-                            <Form.Control onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>PASSWORD</Form.Label>
-                            <Form.Control onChange={e => setPassword(e.target.value)} type="password" placeholder="Enter password" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>VERIFY PASSWORD</Form.Label>
-                            <Form.Control onChange={e => setConfirm(e.target.value)} type="password" placeholder="Confirm password" />
-                        </Form.Group>
-
-                        <div className="buttonlogin">
-                        <Button variant="button1" type="submit" >REGISTER</Button>
-                        {pesan && <p>{pesan}</p>}
-                        </div>
-                    </Form>
-                </div>
-            </div>
-            </div>
+                <Form onSubmit={submitregister} method="post" className="d-flex flex-column align-items-center form-login">
+                    <Form.Group controlId="formBasicUsername" className="w-100">
+                        <Form.Label className="ml-3 label-account">USERNAME</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setUsername(e.target.value)} type="text" placeholder="Enter username" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicEmail" className="w-100">
+                        <Form.Label className="ml-3">EMAIL</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword" className="w-100">
+                        <Form.Label className="ml-3">PASSWORD</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicVPassword" className="w-100">
+                        <Form.Label className="ml-3">VERIFY PASSWORD</Form.Label>
+                        <Form.Control className="login-field" onChange={e => setConfirm(e.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Button variant="ijo" type="submit" className="mt-4" >REGISTER</Button>
+                </Form>
+                <p>Sudah mempunyai akun? <a href="/login" style={{ color: "#529F1F" }}><b>Login</b></a></p>
             </Col>
-            <Col>
-                <div className="kanan">
-                     <Image className="imgloginsam" src={gambar} />
-                </div>
+            <Col className="side-img">
+                <Image src={ sideimage } style={{ width: "50vw", height: "100vh" }}/>
             </Col>
         </Row>
-        
-        {/* <div className="nofull">
-            
-        </div>  */}
         </Container>
     );
 };

@@ -1,12 +1,11 @@
 //Controller untuk homepage 
 class HomeController {
     //**Cek autentikasi user */
-    index = async (req, res) => {
-        const userSession = req.session.user;
+    
+    image = async (req, res) => {
+        const { file } = req.params;
 
-        if(!userSession) return res.json({ auth: false });
-
-        res.json({ auth: true, userSession });
+        res.sendFile(file, { root: './public/' });
     }
 }
 
