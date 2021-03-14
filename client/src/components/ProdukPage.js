@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SERVER_HOST, rupiah } from '../config.js';
-import { Row, Col, Container, Image, Form, Button, div, InputGroup, FormControl, Card, CardDeck } from 'react-bootstrap';
+import { Row, Col, Container, Image, Form, Button, div, InputGroup, FormControl, Card, CardDeck, Toast } from 'react-bootstrap';
 import tomat from '../asset/tomat.jpg'
 import '../css/ProdukPage.css';
 import mega from '../asset/mega1.jpg';
@@ -20,7 +20,7 @@ const ProdukPage = (props) => {
     const [bidInput, setBidInput] = useState(0);
     const [recommendedProducts, setRecommendedProducts] = useState([]);
     const history = useHistory();
-
+    const [showTawaran, setShowTawaran] = useState(false);
     useEffect(() => {
         const url = new URL(window.location.href);
         const pQuery = url.searchParams.get("p");
@@ -78,7 +78,7 @@ const ProdukPage = (props) => {
 
         e.preventDefault();
         if(bidInput < product.minPrice * quantity) { 
-            console.log(false) 
+            setShowTawaran(true); 
         } else {
             const request = { 
                 userID: props.user._id, 
@@ -140,6 +140,21 @@ const ProdukPage = (props) => {
 
     return (
         <Container>
+             <div className="d-flex justify-content-center">
+                <Toast onClose={() => setShowTawaran(false)} show={showTawaran} delay={1500} autohide
+                style={{
+                position: 'fixed',
+                top: "100px",
+                zIndex: 99999,
+                backgroundColor: "rgb(220, 53, 67, .9)",
+                color: "white",
+                maxWidth: "100vw"
+                }}>
+                <Toast.Body>
+                Tawaran melebihi batas maksimal
+                </Toast.Body>
+            </Toast>
+            </div>
             <Row className="justify-content-md-center produk mt-5">
                 <Col lg="6">
                     <img src={ `${SERVER_HOST}/${product.img?.path}.jpg` } 
