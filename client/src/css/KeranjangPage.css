@@ -13,7 +13,6 @@
     background-color: white;
 }
 .boxharga{
-    margin-bottom: 50px;
     background-color: white;
     padding: 20px;
 }
@@ -42,14 +41,12 @@
     border-radius: 1;
     border-style: solid;
     border-color: red;
-    height: 150px;
-    
 }
+
 .kotakduaa{
     border-radius: 1;
     border-style: solid;
     border-color: #529F1F;
-    height: 150px;
 }
 .tawar{
     border-radius: 1;
@@ -83,7 +80,7 @@
     }
     
     .imgprodukkeranjang {
-        width: 100px;
+        width: 150px;
     }
 
     .slider {

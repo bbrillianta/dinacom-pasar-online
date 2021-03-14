@@ -191,19 +191,20 @@ const ProdukPage = (props) => {
 
                                 ?   <div className="d-flex"> 
                                         <Button variant="danger" style={{ width: "500px" }} onClick={() => removeProduct(product) }>
-                                            <img src={gambartas} className="img11"></img>
+                                            <img src={gambartas} width="22"></img>
                                             <text className="text11name"> Keluarkan Kantong </text>
                                         </Button>
                                     </div>
 
-                                :   <div className="d-flex">
-                                        <Button variant="success" style={{ width: "280px" }} onClick={addToCart} >
-                                            <img src={gambartas} className="img11"></img>
-                                            <text className="text11name"> Masukkan Kantong </text>
+                                :   <div className="d-flex flex-column flex-md-row">
+                                        <Button variant="success" className="d-flex align-items-center justify-content-center masuk-kantong" 
+                                         onClick={addToCart} >
+                                            <img src={gambartas} width="22"></img>
+                                            <text> Masukkan Kantong </text>
                                         </Button>
                                 
                                         <Form method="POST" onSubmit={bid}>
-                                            <InputGroup className="pl-3">
+                                            <InputGroup className="mt-4 mt-md-0 pl-md-3">
                                                     <FormControl
                                                         placeholder="Tawar produk"
                                                         aria-label="Recipient's username"

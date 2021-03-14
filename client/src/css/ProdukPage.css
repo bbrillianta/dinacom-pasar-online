@@ -74,3 +74,25 @@
     max-width: 100%;
     max-height: 100%;
 }
+
+.masuk-kantong {
+    width: 280px;
+}
+
+@media (max-width: 1200px) {
+    .masuk-kantong {
+        width: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .masuk-kantong {
+        width: 280px;
+    }
+}
+
+@media (max-width: 767px) {
+    .masuk-kantong {
+        width: auto;
+    }
+}

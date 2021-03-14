@@ -106,7 +106,7 @@ const HomePage = (props) => {
                 }
             </Row>
             <Row className="justify-content-center mt-5">
-                <a href="/products"><Button variant="ijo" style={{width: "400px"}}>LIHAT LAINNYA</Button></a>
+                <a href="/products"><Button variant="ijo" className="px-5">LIHAT LAINNYA</Button></a>
             </Row>
         </Container>
     );

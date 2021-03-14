@@ -8,38 +8,39 @@ import { SERVER_HOST, rupiah } from '../config.js';
 
 const TransactionsPage = (props) => {
     return (
-        <Container className="checkout-page pt-4" style={{ minHeight: "100vh" }} fluid>
+        <Container className="checkout-page pt-4" style={{minHeight: "100vh"}} fluid>
             <Container className="px-5">
             <div class="d-flex justify-content-between ">
                 <div><a href="/" className="top"><img width="30" src={backicon}></img></a> Kembali Belanja</div>
             </div>
             <div className="">
-                
-                <div className="justify-content-center ">
+                <div className="">
                     {
                         props.user.transactions.map((transaction, index) => {
                             return (
                                 <div key={index} 
-                                className="d-flex justify-content-between bd-highlight mt-3 p-4"
+                                className="d-flex flex-column align-items-center flex-md-row justify-content-md-between bd-highlight mt-3 p-4"
                                 style={{ backgroundColor: "white" }}
                                 >
                                     
-                                    <div className="d-flex align-items-center">
-                                        <div className="mx-3 p-1 d-flex aign-items-center justify-content-center"
+                                    <div className="d-flex flex-column flex-md-row align-items-center">
+                                        <div className="mx-md-3 mb-3 mb-md-0 p-1 d-flex aign-items-center justify-content-center"
                                         style={{ backgroundColor: "lightgrey", borderRadius: "20px" }}>
                                             <img src={ellipsis} width="15"></img>
                                         </div>
-                                        <div class="bd-highlight ml-3">
-                                            <div><b>{ transaction.boughtDate }</b></div>
+                                        <div class="bd-highlight ml-md-3 d-flex flex-column align-items-center align-items-md-start">
+                                            <div className="text-center"><b>{ transaction.boughtDate }</b></div>
                                             <div className="d-flex align-items-center mt-1">
-                                                <div>{ transaction.name }</div>
+                                                <div className="text-center">{ transaction.name }</div>
                                             </div>
-                                            <div>{ transaction.address }</div>
+                                            <div className="text-center">{ transaction.address }</div>
                                         </div>    
                                     </div>
                                     <div className="bd-highlight d-flex align-items-center">
                                         
-                                        <a href={`/transactions/details?q=${transaction._id}`}><Button variant="ijo-outline">Lihat Detail</Button></a>
+                                        <a href={`/transactions/details?q=${transaction._id}`} className="mt-4 mt-md-0">
+                                            <Button variant="ijo-outline">Lihat Detail</Button>
+                                        </a>
                                     </div>
                                 </div>
                             )

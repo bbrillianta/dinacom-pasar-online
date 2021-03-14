@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel, Form, Navbar, Nav, FormControl, NavDropdown, InputGroup, Button, Image } from 'react-bootstrap';
 import gambar from '../asset/DosarLogo.png';
 import gambartas from '../asset/shopping-bag-icon.png';
@@ -9,6 +9,8 @@ import { SERVER_HOST } from '../config.js';
 
 
 const NavbarPage = (props) => {
+    const [search, setSearch] = useState();
+
     const logout = () => {
         fetch(`${SERVER_HOST}/logout`, { 
             method: 'DELETE',
@@ -19,6 +21,11 @@ const NavbarPage = (props) => {
     const cartItems = () => {
         const { carts } = props.user;
         return carts.length;
+    }
+
+    const searching = (e) => {
+        e.preventDefault();
+        console.log(encodeURI(search));
     }
 
     return (
@@ -33,9 +40,9 @@ const NavbarPage = (props) => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Form inline className="searchbar mx-5">
-                    <FormControl type="text" placeholder="Search" className="searchtxt"/>
-                    <Button className="searchbtn">Search</Button>
+                <Form inline className=" mx-auto" onSubmit={searching}>
+                    <FormControl type="text" placeholder="Search" className="searchtxt searchbar" onChange={(e) => setSearch(e.target.value)}/>
+                    <Button type="submit" className="searchbtn searchbar">Search</Button>
                 </Form>
                 
                     {   
@@ -51,9 +58,19 @@ const NavbarPage = (props) => {
                                             className="d-inline-block align-top"
                                             alt="DOSAR"
                                         />
-                                        <a className="ml-2">
+                                        <a className="ml-2" style={{ position: "relative" }}>
                                             <p className="m-0" style={{ fontSize: "12px", color: "#529F1F" }}><b>Kantong Belanja</b></p>
-                                            <small><span>{ cartItems() }</span> Barang</small>
+                                            <div className="d-flex justify-content-center align-items-center" style={{ 
+                                                position: "absolute", 
+                                                left: "-20px",
+                                                top: "15px",
+                                                backgroundColor: "red",
+                                                borderRadius: "20px",
+                                                color: "white",
+                                                width: "24px"
+                                            }}>
+                                                <small >{ cartItems() }</small>
+                                            </div> 
                                         </a>
                                     </Nav.Link>
                                     <NavDropdown title=
@@ -72,7 +89,7 @@ const NavbarPage = (props) => {
                                     </Nav.Link>
                                     <Nav.Link href="/register"><Button variant="ijo">Register</Button></Nav.Link>
                                 </Nav>
-                        : null
+                        : <div style={{width: "269.33px"}} className="mx-auto"></div>
                     }
             </Navbar.Collapse>
         </Navbar>

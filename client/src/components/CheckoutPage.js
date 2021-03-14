@@ -89,18 +89,18 @@ const CheckoutPage = (props) => {
                 </Col>
             </Row>
             <Row className="mt-3">
-                <Col lg="9">
-                    <div className="left-col p-5">
-                        <div>
-                            <div className="">
+                <Col lg="8" xl="9">
+                    <div className="left-col p-5 ">
+                        <div className="d-flex flex-column align-items-center align-items-sm-start">
+                            <div className="d-flex flex-column flex-sm-row justify-content-center align-items-center">
                                 <Image src={satu} className="d-inline-block align-center satu" roundedCircle />
-                                <h6 className="d-inline-block ml-4">Alamat Pengiriman</h6>
+                                <h6 className="d-inline-block ml-sm-4 mt-2 mt-sm-0">Alamat Pengiriman</h6>
                             </div>
 
-                            <div className="kotaksatu d-flex" >
+                            <div className="kotaksatu d-flex justify-content-center" >
                                 
                                 { showAlamat 
-                                    ?       <div className="ml-5 my-3 p-3 kotaksatu1">
+                                    ?       <div className="ml-sm-5 my-3 p-3 kotaksatu1">
                                                 <div className="">
                                                     <div className="d-flex justify-content-between">
                                                         <h5><b>{alamat.name}</b></h5>
@@ -110,127 +110,138 @@ const CheckoutPage = (props) => {
                                                 </div>
                                             </div>
 
-                                    :       <a href="#" className="ml-5 my-3 kotakalamat p-3" onClick={handleShow}>
-                                                <div className="d-flex flex-column align-items-center">
+                                    :       <a href="#" className="ml-sm-5 my-3 kotakalamat p-3" onClick={handleShow}>
+                                                <div className="d-flex flex-column align-items-center  justify-content-sm-start">
                                                     <a className="btn btn-alamat rounded-circle px-3 mb-3"><h1 className="m-0">+</h1></a>
-                                                    <div>Tambahkan alamat</div>
+                                                    <div className="text-center">Tambahkan alamat</div>
                                                 </div>
                                             </a>
                                 }
                                 
                             </div>
+                        </div>
 
-                        </div>
-                        <div className="mr-auto textsatu">
-                            <Image src={dua} className="d-inline-block align-center satu" roundedCircle />
-                            <h6 className="d-inline-block align-center ml-4">Total Pesanan</h6>
-                        </div>
-                        <div className="kotakdua">
-                            <div>
-                                {
-                                    props.user.carts.map((item, index) => 
-                                        <div className="kotakdua1" className={item.status !==1 && 'd-none'}>
-                                            <div className="d-flex ml-5 py-3">
-                                                <img src={`${SERVER_HOST}/${item.product.img.path}.jpg`} width="120" height="83" style={{ objectFit: "cover" }}></img>
-                                                <div className="d-flex flex-column justify-content-center ml-4">
-                                                    <div><b>{item.product.name}</b></div>
-                                                    <small className="my-1"><b>Jumlah: {item.quantity} kg</b></small>
-                                                    <h5><b>Rp{ rupiah(item.product.price * item.quantity) }</b></h5>
+                        <hr className="d-block d-sm-none"></hr>
+
+                        {/* Total pesanan */}
+                        <div className="d-flex flex-column align-items-center align-items-sm-start">
+                            <div className="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                                <Image src={dua} className="d-inline-block align-center satu" roundedCircle />
+                                <h6 className="d-inline-block align-center ml-sm-4 mt-2 mt-sm-0">Total Pesanan</h6>
+                            </div>
+                            <div className="kotakdua">
+                                <div>
+                                    {
+                                        props.user.carts.map((item, index) => 
+                                            <div className="kotakdua1" className={item.status !==1 && 'd-none'}>
+                                                <div className="d-flex flex-column align-items-center flex-sm-row ml-sm-5 py-3">
+                                                    <img src={`${SERVER_HOST}/${item.product.img.path}.jpg`} width="120" height="83" style={{ objectFit: "cover" }}></img>
+                                                    <div className="d-flex flex-column align-items-center align-items-sm-start ml-sm-4">
+                                                        <div><b>{item.product.name}</b></div>
+                                                        <small className="my-1"><b>Jumlah: {item.quantity} kg</b></small>
+                                                        <h5><b>Rp{ rupiah(item.product.price * item.quantity) }</b></h5>
+                                                    </div>
                                                 </div>
+                                            </div>  
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr className="d-block d-sm-none"></hr>
+
+                        {/* Pembayaran */}
+                        <div className="d-flex flex-column align-items-center align-items-sm-start">
+                            <div className="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                                <Image src={tiga} className="d-inline-block align-center satu" roundedCircle />
+                                <h6 className="d-inline-block align-center ml-sm-4 mt-2 mt-sm-0">Metode Pembayaran</h6>
+                            </div>
+                            <div className="kotaktiga">
+                                <Row className="ml-sm-5 ">
+                                    {['radio'].map((type) => (
+                                        <div key={`custom-inline-${type}`} className="mb-3">
+                                        <Form.Check
+                                            custom
+                                            inline
+                                            label="Bayar Ditempat"
+                                            type={type}
+                                            name="pembayaran"
+                                            id={`custom-inline-${type}-1`}
+                                            checked={ pembayaran === "Tunai" ? true : false }
+                                            onChange={() => setPembayaran("Tunai")}
+                                        />
+                                        <Form.Check
+                                            custom
+                                            inline
+                                            label="Kartu Kredit"
+                                            type={type}
+                                            name="pembayaran"
+                                            id={`custom-inline-${type}-2`}
+                                            onChange={() => setPembayaran("Kredit")}
+                                        />
+                                        <Form.Check
+                                            custom
+                                            inline
+                                            name="pembayaran"
+                                            label="M-Banking"
+                                            type={type}
+                                            id={`custom-inline-${type}-3`}
+                                            onChange={() => setPembayaran("M-Banking")}
+                                        />
+                                        </div>
+                                    ))}
+                                </Row>
+                                
+                                {/* Bayar ditempat */
+                                pembayaran === "Tunai" &&
+                                <Row className="ml-sm-5">
+                                    <div className="kotaktiga1">
+                                        <div className="p-3">
+                                            <div className="d-flex align-items-center mb-2">
+                                                <img src={cash} width="50"></img>
+                                                <b className="ml-3">BAYAR DITEMPAT</b>
                                             </div>
-                                        </div>  
-                                    )
+                                            <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
+                                        </div>
+                                    </div>
+                                </Row>
+                                }
+
+                                {/* Kartu Kredit */
+                                pembayaran === "Kredit" && 
+                                <Row className="ml-sm-5">
+                                    <div className="kotaktiga1">
+                                        <div className="p-3">
+                                            <div className="d-flex align-items-center mb-2">
+                                                <img src={cash} width="50"></img>
+                                                <b className="ml-3">KARTU KREDIT</b>
+                                            </div>
+                                            <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
+                                        </div>
+                                    </div>
+                                </Row>
+                                }
+
+                                {/* M-Banking */
+                                pembayaran === "M-Banking" &&
+                                <Row className="ml-sm-5">
+                                    <div className="kotaktiga1">
+                                        <div className="p-3">
+                                            <div className="d-flex align-items-center mb-2">
+                                                <img src={cash} width="50"></img>
+                                                <b className="ml-3">M-BANKING</b>
+                                            </div>
+                                            <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
+                                        </div>
+                                    </div>
+                                </Row>
                                 }
                             </div>
                         </div>
-                        <div className="mr-auto textsatu">
-                            <Image src={tiga} className="d-inline-block align-center satu" roundedCircle />
-                            <h6 className="d-inline-block align-center ml-4">Metode Pembayaran</h6>
-                        </div>
-                        <div className="kotaktiga">
-                            <Row className="ml-5 ">
-                                {['radio'].map((type) => (
-                                    <div key={`custom-inline-${type}`} className="mb-3">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        label="Bayar Ditempat"
-                                        type={type}
-                                        name="pembayaran"
-                                        id={`custom-inline-${type}-1`}
-                                        checked={ pembayaran === "Tunai" ? true : false }
-                                        onChange={() => setPembayaran("Tunai")}
-                                    />
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        label="Kartu Kredit"
-                                        type={type}
-                                        name="pembayaran"
-                                        id={`custom-inline-${type}-2`}
-                                        onChange={() => setPembayaran("Kredit")}
-                                    />
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        name="pembayaran"
-                                        label="M-Banking"
-                                        type={type}
-                                        id={`custom-inline-${type}-3`}
-                                        onChange={() => setPembayaran("M-Banking")}
-                                    />
-                                    </div>
-                                ))}
-                            </Row>
-                            
-                            {/* Bayar ditempat */
-                            pembayaran === "Tunai" &&
-                            <Row className="ml-5">
-                                <div className="kotaktiga1">
-                                    <div className="p-3">
-                                        <div className="d-flex align-items-center mb-2">
-                                            <img src={cash} width="50"></img>
-                                            <b className="ml-3">BAYAR DITEMPAT</b>
-                                        </div>
-                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
-                                    </div>
-                                </div>
-                            </Row>
-                            }
-
-                            {/* Kartu Kredit */
-                            pembayaran === "Kredit" && 
-                            <Row className="ml-5">
-                                <div className="kotaktiga1">
-                                    <div className="p-3">
-                                        <div className="d-flex align-items-center mb-2">
-                                            <img src={cash} width="50"></img>
-                                            <b className="ml-3">KARTU KREDIT</b>
-                                        </div>
-                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
-                                    </div>
-                                </div>
-                            </Row>
-                            }
-
-                            {/* M-Banking */
-                            pembayaran === "M-Banking" &&
-                            <Row className="ml-5">
-                                <div className="kotaktiga1">
-                                    <div className="p-3">
-                                        <div className="d-flex align-items-center mb-2">
-                                            <img src={cash} width="50"></img>
-                                            <b className="ml-3">M-Banking</b>
-                                        </div>
-                                        <div>Siapkan sejumlah uang sesuai total pembayaran yang diterima</div>
-                                    </div>
-                                </div>
-                            </Row>
-                            }
-                        </div>
                     </div>
                 </Col>
-                <Col lg="3">
+                <Col lg="4" xl="3" className="mt-4 mt-lg-0">
                     <div className="right-col p-4">
                         <strong>Detail Pesanan</strong>
                         <hr></hr>

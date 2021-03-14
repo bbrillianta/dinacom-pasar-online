@@ -100,3 +100,24 @@
     border-color: #cecece; 
     box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
 }
+
+@media (max-width: 575px) {
+    .kotaksatu{
+        border: 0;
+        margin-left: 0;
+    }
+
+    .kotakdua{
+        border: 0;
+        margin-left: 0;
+    }
+
+    .kotaktiga{
+        border: 0;
+        margin-left: 0;
+    }
+
+    .kotaktiga1{
+        width: auto;
+    }
+}

@@ -88,12 +88,12 @@ const KeranjangPage = (props) => {
     const itemStatus = (item, index) => {
         if(item.status === 1) {
             return (
-                <div key={index} className="d-flex justify-content-between bd-highlight mt-3 kotakduaa px-3">
-                    <div className="d-flex align-items-center">
+                <div key={index} className="d-flex justify-content-md-between justify-content-center bd-highlight mt-3 kotakduaa p-3" style={{position: "relative"}}>
+                    <div className="d-flex flex-column flex-md-row align-items-center">
                         <div className="bd-highlight">
                             <img src={ `${SERVER_HOST}/${item.product.img.path}.jpg`} className="imgprodukkeranjang"></img>
                         </div>
-                        <div class="bd-highlight ml-3">
+                        <div class="bd-highlight ml-md-3 d-flex flex-column align-items-center">
                             <div><b>{ item.product.name }</b></div>
                             <div className="d-flex align-items-center mt-1">
                                 <div><b className="hargakeranjangg"> Rp{ rupiah(item.product.price) }</b>/kg</div>
@@ -111,27 +111,31 @@ const KeranjangPage = (props) => {
                             </div>
                         </div>    
                     </div>
-                    <div className="bd-highlight d-flex align-items-center" onClick={ () => removeFromCart(item)}>
+                    <div className="bd-highlight d-md-flex align-items-end align-items-md-center d-none" onClick={ () => removeFromCart(item)}>
+                        <img src={del} className="gambarsampah"></img>
+                    </div>
+                    <div className="bd-highlight d-flex d-md-none" style={{ position: "absolute", top: "2px", right: "2px" }} onClick={ () => removeFromCart(item)}>
                         <img src={del} className="gambarsampah"></img>
                     </div>
                 </div>
             )
         } else if(item.status === 2) {
             return (
-                <div key={index} className="d-flex justify-content-between bd-highlight mt-3 kotaksatuu px-3" style={{position: "relative"}}>
-                    <div className="d-flex align-items-center">
+                <div key={index} className="d-flex justify-content-md-between justify-content-center bd-highlight mt-3 kotaksatuu px-3" style={{position: "relative"}}>
+                    <div className="d-flex flex-column flex-md-row align-items-center  p-3">
                         <div className="bd-highlight">
                             <img src={ `${SERVER_HOST}/${item.product.img.path}.jpg`} className="imgprodukkeranjang"></img>
                         </div>
-                        <div class="bd-highlight ml-3">
+                        <div class="bd-highlight ml-md-3 ">
                             <div><b>{ item.product.name }</b></div>
                             <div className="d-flex align-items-center mt-1">
                                 <div>
                                     <b className="hargakeranjangg" style={{ color: "red" }}> Rp{ rupiah(item.product.price * item.quantity) }</b>
                                 </div>
-                                <b className="mx-1 mx-lg-3">  { '> > > >' } </b>
+                                <b className="mx-1 mx-lg-3 d-none d-md-flex">  { '> > > >' } </b>
+                                <b className="mx-1 mx-lg-3 d-flex d-md-none">  { ' > ' } </b>
                                 <div className="tawar">Rp. { rupiah(item.product.price - item.discount) }</div>
-                                <div className="d-flex align-items-center">
+                                <div className="d-md-flex d-none align-items-center">
                                     <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
                                         <img src={danger} className="gambarsampah ml-3"/>
                                     </OverlayTrigger>
@@ -139,43 +143,47 @@ const KeranjangPage = (props) => {
                             </div>
                         </div>    
                     </div>
-                    <div className="bd-highlight d-flex align-items-center" onClick={ () => removeFromCart(item)}>
+                    <div className="bd-highlight d-none d-md-flex align-items-center" onClick={ () => removeFromCart(item)}>
                         <Button variant="danger">Batal</Button>
                     </div>
-
-
-                    {/* <img src={del} className="gambarsampah" ></img> */}
+                    <div className="bd-highlight d-flex d-md-none" style={{ position: "absolute", top: "3px", right: "3px" }} onClick={ () => removeFromCart(item)}>
+                        <img src={del} className="gambarsampah"></img>
+                    </div>
                 </div>                
             )
         }
     }
 
     return (
-        <Container>
-            <div class="d-flex justify-content-between mt-4">
-                <div><a href="/" className="top"><img width="30" src={backicon}></img></a> Kembali Belanja</div>
-                <div><a href="/cart" className="top"><img className="refresh" src={refresh}></img></a></div>
-            </div>
-            <div className="boxkeranjang">
-                <div className="d-flex justify-content-center keranjangatas"><b>DAFTAR BELANJAAN</b></div>
-                <div className="justify-content-center keranjangbawah">
-                    {
-                        props.user.carts.map((item, index) =>
-                            itemStatus(item, index)
-                        )
-                    }
+        <Container className="checkout-page" style={{minHeight: "88vh"}} fluid>
+            <Container >
+                <div class="d-flex justify-content-between pt-4">
+                    <div><a href="/" className="top"><img width="30" src={backicon}></img></a> Kembali Belanja</div>
+                    <div><a href="/cart" className="top"><img className="refresh" src={refresh}></img></a></div>
                 </div>
-            </div>
-
-            <div className="d-flex justify-content-between align-items-center boxharga">
-                    <div>
-                        <div><h6><b>Total Belanja { checkTotalItems() }</b></h6></div>
-                        <div><h5><b>Rp{ rupiah(getTotalPrice(props)) }</b></h5></div>
+                <div className="boxkeranjang">
+                    <div className="d-flex justify-content-center keranjangatas"><b>DAFTAR BELANJAAN</b></div>
+                    <div className="justify-content-center keranjangbawah">
+                        {
+                            props.user.carts.map((item, index) =>
+                                itemStatus(item, index)
+                            )
+                        }
                     </div>
-                    <div>
-                        <Button variant="success" href="/checkout"><b>CHECKOUT</b></Button>
+                </div>
+                
+                <div className="pb-5">
+                    <div className="d-flex justify-content-between align-items-center boxharga">
+                            <div>
+                                <div><h6><b>Total Belanja { checkTotalItems() }</b></h6></div>
+                                <div><h5><b>Rp{ rupiah(getTotalPrice(props)) }</b></h5></div>
+                            </div>
+                            <div>
+                                <Button variant="success" href="/checkout"><b>CHECKOUT</b></Button>
+                            </div>
                     </div>
-            </div>
+                </div>
+            </Container>
         </Container>
     );
 };
